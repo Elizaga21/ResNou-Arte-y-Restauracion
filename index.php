@@ -18,47 +18,8 @@ session_start();
 
 <body>
     <div class="container">
-        <header>
-            <nav class="header__nav w-120">
-                <div class="header__logo">
-                    <img src="assets/img/LogoRESNOUverdeC.png" alt="Logo">
-                </div>
-                <div class="header__nav__content">
-                    <div class="nav-close-icon"></div>
-                    <ul class="header__menu">
-                        <li class="menu__item">
-                            <a href="#" class="menu__link active">Home</a>
-                        </li>
-                        <li class="menu__item">
-                            <a href="#" class="menu__link">Clases</a>
-                        </li>
-                        <li class="menu__item">
-                            <a href="#" class="menu__link">Productos</a>
-                        </li>
-                        <li class="menu__item">
-                            <a href="#" class="menu__link">Blog</a>
-                        </li>
-                        <li class="menu__item">
-                            <a href="#" class="menu__link">Contacto</a>
-                        </li>
-                    </ul>
-                    <div class="header__signup">
-                        <a href="#" class="btn btn__signup">
-                            <i class="fas fa-user-plus"></i> Sign Up
-                        </a>
-                    </div>
-                </div>
-
-                <div class="hamburger-menu-wrap">
-                    <div class="hamburger-menu">
-                        <div class="line"></div>
-                        <div class="line"></div>
-                        <div class="line"></div>
-                    </div>
-                </div>
-            </nav>
-        </header>
-
+    <?php include 'header.php'; ?>
+   
         <section class="hero w-120">
             <div class="hero__content">
                 <div class="hero__text">
@@ -67,18 +28,14 @@ session_start();
                         Restauramos todas tus antigüedades, muebles y objetos. ¿Qué cuentas cuando enseñas tu casa? Llénala de objetos especiales, con historia, con tu identidad y tus valores. 
                         La velada será inolvidable.
                     </p>
-                    <a href="#" class="btn btn__hero">İnvest Now</a>
+                    <a href="#" class="btn btn__hero">Reservar una cita</a>
                 </div>
                 <div class="hero__img">
                     <img src="assets/img/home1.png" alt="">
                 </div>
             </div>
         </section>
-        <?php
-        include 'db_connection.php';
-        session_start();
-        ?>
-
+        
         <section class="opportunities">
             <div class="opportunities__img">
                 <img src="assets/img/leaf.png" alt="">
@@ -356,80 +313,8 @@ session_start();
             <a href="#" class="btn btn__farm--invest">Invest Now</a>
 
         </section>
+        <?php include 'footer.php'; ?>
 
-        <footer class="footer">
-            <div class="footer__body w-105">
-                <nav class="footer__nav">
-                    <ul class="footer_nav__menu">
-                        <li class="footer_nav__item">
-                            <h4 class="footer_nav__menu__title">COMPANY</h4>
-                        </li>
-                        <li class="footer_nav__item">
-                            <a href="#" class="footer_nav__link">About Us</a>
-                        </li>
-                        <li class="footer_nav__item">
-                            <a href="#" class="footer_nav__link">Team</a>
-                        </li>
-                        <li class="footer_nav__item">
-                            <a href="#" class="footer_nav__link">Careers</a>
-                        </li>
-                        <li class="footer_nav__item">
-                            <a href="#" class="footer_nav__link">Contact</a>
-                        </li>
-                    </ul>
-                    <ul class="footer_nav__menu">
-                        <li class="footer_nav__item">
-                            <h4 class="footer_nav__menu__title">INVEST</h4>
-                        </li>
-                        <li class="footer_nav__item">
-                            <a href="#" class="footer_nav__link">Features</a>
-                        </li>
-                        <li class="footer_nav__item">
-                            <a href="#" class="footer_nav__link">How it works</a>
-                        </li>
-                        <li class="footer_nav__item">
-                            <a href="#" class="footer_nav__link">Precios</a>
-                        </li>
-                        <li class="footer_nav__item">
-                            <a href="#" class="footer_nav__link">Login</a>
-                        </li>
-                    </ul>
-                    <ul class="footer_nav__menu">
-                        <li class="footer_nav__item">
-                            <h4 class="footer_nav__menu__title">LEGAL</h4>
-                        </li>
-                        <li class="footer_nav__item">
-                            <a href="#" class="footer_nav__link">Privacidad</a>
-                        </li>
-                        <li class="footer_nav__item">
-                            <a href="#" class="footer_nav__link">Términos</a>
-                        </li>
-                        <li class="footer_nav__item">
-                            <a href="#" class="footer_nav__link">Seguridad</a>
-                        </li>
-                    </ul>
-                </nav>
-                <div class="footer__contact">
-                    <h5 class="footer__contact__title">Contacto</h5>
-                    <span>Escríbenos un email</span>
-                    <a href="mailto:eva@resnou.com" class="email">eva@resnou.com</a>
-                    <a href="#" class="btn btn__signin">
-                        <i class="far fa-user"></i> Sign In
-                    </a>
-                </div>
-            </div>
-            <div class="footer__bottom">
-                <div class="footer__bottom__content w-105">
-                    <div class="footer__logo">
-                        <img src="assets/img/logo_footer.png" alt="ResNou Logo"/>
-                    </div>
-                    <p class="footer_copyright">
-                        © Copyright 2024
-                    </p>
-                </div>
-                <img src="assets/img/mountain.png" alt="Mountain" class="footer_img">
-            </div>
-        </footer>
     </div>
     <script src="assets/js/main.js" type="module"></script>
 

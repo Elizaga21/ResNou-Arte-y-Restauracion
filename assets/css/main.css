@@ -124,10 +124,11 @@ header {
   justify-content: flex-end;
 }
 
+
 .btn__signup {
-  border: 1px solid #ffffff;
+  border: 1px solid #201a1a;
   font-size: 1.6rem;
-  color: #ffffff;
+  color: #5f9f49;
   /*
     Button hover effect resource
     https://codepen.io/alticreation/pen/zBZwOP
@@ -146,7 +147,7 @@ header {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: transparent;
+  background-color: #315f33;
   z-index: -2;
 }
 
@@ -157,7 +158,7 @@ header {
   left: 0;
   width: 0%;
   height: 100%;
-  background-color: #66BB6A;
+  background-color: #315f33;
   transition: all .3s;
   z-index: -1;
 }

@@ -308,6 +308,7 @@ header {
 }
 
 /*End Hero */
+
 /*Opportunities*/
 .opportunities {
   position: relative;
@@ -382,7 +383,7 @@ header {
 }
 
 .opportunity__icon {
-  max-height: 5.6rem;
+  max-height: 9.6rem;
   width: initial;
 }
 
@@ -430,11 +431,11 @@ header {
 }
 
 .invest__item:nth-child(1) {
-  background: url("../img/investments/invest-1.png") no-repeat center/cover;
+  background: url("../img/20230406_083348.jpg") no-repeat center/cover;
 }
 
 .invest__item:nth-child(2) {
-  background: url("../img/investments/invest-2.png") no-repeat center/cover;
+  background: url("../img/clases/Designer\ \(4\).jpeg") no-repeat center/cover;
 }
 
 .invest__item__subtitle {
@@ -1170,11 +1171,9 @@ header {
     text-align: center;
   }
   /*End Testimonials*/
-  /*Farm Invest*/
   .btn__farm--invest {
     width: 80%;
     min-width: initial;
   }
-  /*End Farm Invest*/
+
 }
-/*# sourceMappingURL=main.css.map */

@@ -2,6 +2,15 @@
 require 'db_connection.php';
 session_start();
 
+// Función para incluir el encabezado
+function incluirEncabezado() {
+    include 'header.php';
+}
+
+// Función para incluir el pie de página
+function incluirPiePagina() {
+    include 'footer.php';
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Verificar si se proporcionaron tanto DNI como correo electrónico
@@ -22,80 +31,77 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <html>
             <head>
                 <title>Recuperar y Establecer Contraseña</title>
-                <link rel="stylesheet" href="styles.css">
-                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-                <script src="https://kit.fontawesome.com/eb496ab1a0.js" crossorigin="anonymous"></script>
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
+                <link rel="stylesheet" href="assets/css/main.css">
                 <style>
+                /* Estilos CSS */
                 body {
-                    font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
-                    background-color: #f4f4f4;
                     display: flex;
                     flex-direction: column;
-                    align-items: center;
-                    justify-content: center;
-                    height: 100vh;
+                    min-height: 100vh;
                     margin: 0;
-                    color: #333;
                 }
-        
-                #container {
-                    text-align: center;
-                    max-width: 400px;
+                
+                main {
+                    flex: 1;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+                
+                .password-recovery {
+                    max-width: 40rem;
                     width: 100%;
-                    padding: 20px;
-                    background-color: #fff;
-                    border: 1px solid #ddd;
-                    border-radius: 8px;
-                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-                    margin-top: 50px;
+                    padding: 2rem;
+                    border-radius: 1rem;
+                    background-color: #f7f7f7;
+                    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
                 }
         
-                h2 {
-                    color: #495057;
-                    font-size: 24px;
-                    margin-bottom: 20px;
+                .password-recovery__title {
+                    font-size: 2.4rem;
+                    margin-bottom: 2rem;
                 }
         
-                form {
-                    margin-top: 20px;
-                }
-        
-                input {
+                .password-recovery__input {
                     width: 100%;
-                    padding: 10px;
-                    margin-bottom: 15px;
+                    padding: 1rem;
+                    margin-bottom: 1.5rem;
                     border: 1px solid #ccc;
-                    border-radius: 4px;
-                    box-sizing: border-box;
+                    border-radius: 0.5rem;
+                    font-size: 1.6rem;
                 }
         
-                input[type="submit"] {
-                    background-color: #333;
-                    color: white;
+                .password-recovery__button {
+                    width: 100%;
+                    padding: 1rem;
+                    border: none;
+                    border-radius: 0.5rem;
+                    background-color: #66BB6A;
+                    color: #fff;
+                    font-size: 1.6rem;
                     cursor: pointer;
-                    transition: background-color 0.3s;
+                    transition: background-color 0.3s ease;
                 }
         
-                input[type="submit"]:hover {
-                    background-color: #555;
+                .password-recovery__button:hover {
+                    background-color: #5a9c5a;
                 }
-                </style>
-                <script>
-                // JavaScript para mostrar mensaje emergente y redirigir
-                function mostrarMensaje() {
-                    alert("Contraseña actualizada correctamente.");
-                    window.location.href = "login.php";
-                }
-                </script>
+            </style>
             </head>
-            <body>
-                <h2>Recuperar y Establecer Contraseña</h2>
-                <form method="POST" onsubmit="mostrarMensaje()">
-                    <input type="hidden" name="id" value="' . $user['id'] . '">
-                    <input type="password" name="nueva_contrasena" placeholder="Nueva Contraseña">
-                    <input type="submit" name="guardar_contraseña" value="Guardar Nueva Contraseña">
-                </form>
+            <body>';
+            incluirEncabezado();
+            echo '
+            <main>
+            <form class="password-recovery" method="POST" onsubmit="mostrarMensaje()">
+            <h2 class="password-recovery__title">Recuperar y Establecer Contraseña</h2>
+            <input type="hidden" name="id" value="' . $user['id'] . '">
+            <input type="password" class="password-recovery__input" name="nueva_contrasena" placeholder="Nueva Contraseña">
+            <button type="submit" class="password-recovery__button" name="guardar_contraseña">Guardar Nueva Contraseña</button>
+            </form>
+            </main>';
+            incluirPiePagina();
+            echo '
             </body>
             </html>';
 
@@ -125,81 +131,65 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <html>
     <head>
         <title>Recuperar Contraseña</title>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-        <link rel="stylesheet" href="styles.css">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-        <script src="https://kit.fontawesome.com/eb496ab1a0.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
+        <link rel="stylesheet" href="assets/css/main.css">
         <style>
-        body {
-            font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
-            background-color: #f4f4f4;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-            color: #333;
+        /* Estilos CSS */
+        .password-recovery {
+            max-width: 40rem;
+            margin: auto;
+            padding: 2rem;
+            border-radius: 1rem;
+            background-color: #f7f7f7;
+            box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
         }
 
-        .container {
-            text-align: center;
-            max-width: 400px;
+        .password-recovery__title {
+            font-size: 2.4rem;
+            margin-bottom: 2rem;
+        }
+
+        .password-recovery__input {
             width: 100%;
-            padding: 20px;
-            background-color: #fff; 
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
-            margin-top: 50px; 
-        }
-
-        h2 {
-            color: #495057; 
-            font-size: 22px; 
-        }
-
-        form {
-            margin-top: 20px;
-        }
-
-        input {
-            margin-bottom: 15px;
-            width: 100%;
-            padding: 10px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
             border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
+            border-radius: 0.5rem;
+            font-size: 1.6rem;
         }
 
-        input[type="submit"] {
-            background-color: #000;
-            color: #fff;
-            padding: 10px 15px;
+        .password-recovery__button {
+            width: 100%;
+            padding: 1rem;
             border: none;
-            border-radius: 4px;
+            border-radius: 0.5rem;
+            background-color: #66BB6A;
+            color: #fff;
+            font-size: 1.6rem;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s ease;
         }
 
-        input[type="submit"]:hover {
-            background-color: #333; 
+        .password-recovery__button:hover {
+            background-color: #5a9c5a;
         }
-        </style>
+    </style>
     </head>
-    <body>
-        <div class="container">
-            <h2>Recuperar Contraseña</h2>
-            <form method="POST">
-                <input type="text" name="DNI" placeholder="DNI">
-                <input type="text" name="Email" placeholder="Correo electrónico">
-                <input type="submit" value="Recuperar Contraseña">
-            </form>
-        </div>
+    <body>';
+    incluirEncabezado();
+    echo '
+    <form class="password-recovery" method="POST">
+    <h2 class="password-recovery__title">Recuperar Contraseña</h2>
+    <input type="text" name="DNI" class="password-recovery__input" placeholder="DNI" required>
+    <input type="email" name="Email" class="password-recovery__input" placeholder="Correo Electrónico" required>
+    <button type="submit" class="password-recovery__button">Recuperar Contraseña</button>
+  </form>';
+    incluirPiePagina();
+    echo '
     </body>
     </html>';
 }
+
 session_write_close();
 
 ?>

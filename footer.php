@@ -5,36 +5,30 @@
                 <nav class="footer__nav">
                     <ul class="footer_nav__menu">
                         <li class="footer_nav__item">
-                            <h4 class="footer_nav__menu__title">COMPANY</h4>
+                            <h4 class="footer_nav__menu__title">Empresa</h4>
                         </li>
                         <li class="footer_nav__item">
-                            <a href="#" class="footer_nav__link">About Us</a>
+                            <a href="#" class="footer_nav__link">Historia</a>
                         </li>
                         <li class="footer_nav__item">
-                            <a href="#" class="footer_nav__link">Team</a>
+                            <a href="#" class="footer_nav__link">Equipo</a>
                         </li>
                         <li class="footer_nav__item">
-                            <a href="#" class="footer_nav__link">Careers</a>
-                        </li>
-                        <li class="footer_nav__item">
-                            <a href="#" class="footer_nav__link">Contact</a>
+                            <a href="contacto.php" class="footer_nav__link">Contacto</a>
                         </li>
                     </ul>
                     <ul class="footer_nav__menu">
                         <li class="footer_nav__item">
-                            <h4 class="footer_nav__menu__title">INVEST</h4>
+                            <h4 class="footer_nav__menu__title">Restauración</h4>
                         </li>
                         <li class="footer_nav__item">
-                            <a href="#" class="footer_nav__link">Features</a>
-                        </li>
-                        <li class="footer_nav__item">
-                            <a href="#" class="footer_nav__link">How it works</a>
+                            <a href="#" class="footer_nav__link">Proceso Restauración</a>
                         </li>
                         <li class="footer_nav__item">
                             <a href="#" class="footer_nav__link">Precios</a>
                         </li>
                         <li class="footer_nav__item">
-                            <a href="#" class="footer_nav__link">Login</a>
+                            <a href="login.php" class="footer_nav__link">Login</a>
                         </li>
                     </ul>
                     <ul class="footer_nav__menu">
@@ -56,7 +50,7 @@
                     <h5 class="footer__contact__title">Contacto</h5>
                     <span>Escríbenos un email</span>
                     <a href="mailto:eva@resnou.com" class="email">eva@resnou.com</a>
-                    <a href="#" class="btn btn__signin">
+                    <a href="login.php" class="btn btn__signin">
                         <i class="far fa-user"></i> Sign In
                     </a>
                 </div>

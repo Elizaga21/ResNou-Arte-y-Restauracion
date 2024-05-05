@@ -144,16 +144,16 @@ echo '</a></li>';
                             <a href="#" class="menu__link active">Home</a>
                         </li>
                         <li class="menu__item">
-                            <a href="#" class="menu__link">Clases</a>
+                            <a href="clases.php" class="menu__link">Clases</a>
                         </li>
                         <li class="menu__item">
-                            <a href="#" class="menu__link">Productos</a>
+                            <a href="servicios.php" class="menu__link">Servicios</a>
                         </li>
                         <li class="menu__item">
-                            <a href="#" class="menu__link">Blog</a>
+                            <a href="galeria.php" class="menu__link">Galería</a>
                         </li>
                         <li class="menu__item">
-                            <a href="#" class="menu__link">Contacto</a>
+                            <a href="contacto.php" class="menu__link">Contacto</a>
                         </li>
                     </ul>
                     <div class="header__signup">

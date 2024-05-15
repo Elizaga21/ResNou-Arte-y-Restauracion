@@ -14,6 +14,8 @@
 
 .contact-info {
     background-color: #f7f7f7;
+    margin-top: 100px; 
+    margin-bottom: 50px;
     display: flex;
     justify-content: center;
     text-align:center;

@@ -38,8 +38,8 @@ session_start();
         
         <section class="opportunities">
             <div class="opportunities__img">
-                <img src="assets/img/leaf.png" alt="">
-            </div>
+<!-- <img src="assets/img/Designer__6_-removebg-preview.png" alt="Muebles"> -->
+</div>
             <div class="opportunities__content w-105">
                 <div class="opportunities__head">
                     <h2 class="opportunities__title">Nuevas oportunidades para tus muebles y antigüedades</h2>
@@ -47,21 +47,21 @@ session_start();
                 </div>
                 <div class="opportunities__body">
                     <div class="opportunity">
-                        <img src="assets/img/icono2-removebg-preview.png" alt="Icon" class="opportunity__icon">
+                        <img src="assets/img/phone_in_talk_FILL0_wght400_GRAD0_opsz24.svg" alt="Icon" class="opportunity__icon">
                         <h4 class="opportunity__title">Contacta con nosotros y pide un presupuesto</h4>
                         <p class="opportunity__description"> Dinos tu idea y le daremos forma.
                         </p>
                     </div>
 
                     <div class="opportunity active">
-                        <img src="assets/img/opportunites/opportunity-2.svg" alt="Icon" class="opportunity__icon">
+                        <img src="assets/img/view_timeline_24dp_FILL0_wght400_GRAD0_opsz24.svg" alt="Icon" class="opportunity__icon">
                         <h4 class="opportunity__title">Ten los detalles del proceso de restauración</h4>
                         <p class="opportunity__description">
                         Una vez que la idea se ha convertido en un proyecto, el proceso de restauración comienza.
                         </p>
                     </div>
                     <div class="opportunity">
-                        <img src="assets/img/icono7-removebg-preview.png" alt="Icon" class="opportunity__icon">
+                        <img src="assets/img/check_small_24dp_FILL0_wght400_GRAD0_opsz24.svg" alt="Icon" class="opportunity__icon">
                         <h4 class="opportunity__title">Mueble restaurado
                         </h4>
                         <p class="opportunity__description">

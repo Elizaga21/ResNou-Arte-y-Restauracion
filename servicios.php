@@ -15,8 +15,23 @@
     <style>
 
 .services {
-    padding: 80px 0;
+    justify-content: center;
+    padding: 20px;
+    margin-top: 100px; 
+    margin-bottom: 50px;
+   
 }
+
+.service {
+    margin-bottom: 20px; 
+    text-align: justify; 
+}
+
+.service__description,
+.service__more-info {
+    text-align: justify; 
+}
+
 
 .section__title {
     color: #333333;

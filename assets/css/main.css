@@ -1111,6 +1111,7 @@ header {
   .opportunities__img img {
     max-height: 40rem;
     max-width: 10rem;
+    max-width: 100;
   }
   .opportunity__icon {
     width: inherit;
@@ -1122,6 +1123,7 @@ header {
   }
   .invest__item__title {
     font-size: 2.4rem;
+    background-color: var(--green);
   }
   /*End Invest Section*/
   /*How Is Works*/

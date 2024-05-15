@@ -141,7 +141,7 @@ echo '</a></li>';
     
         ?>
                         <li class="menu__item">
-                            <a href="#" class="menu__link active">Home</a>
+                            <a href="index.php" class="menu__link active">Home</a>
                         </li>
                         <li class="menu__item">
                             <a href="clases.php" class="menu__link">Clases</a>

@@ -11,9 +11,9 @@
     <link rel="stylesheet" href="assets/css/gallery.css"> 
 </head>
 <body>
-<div class="header-container">
+
     <?php include 'header.php'; ?>
-</div>
+
     <section class="gallery">
         <div class="container">
             <h2>Nuestra Galería</h2>

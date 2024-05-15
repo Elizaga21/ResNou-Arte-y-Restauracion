@@ -60,10 +60,7 @@
                     <div class="footer__logo">
                         <img src="assets/img/logo_footer.png" alt="ResNou Logo"/>
                     </div>
-                    <p class="footer_copyright">
-                        © Copyright 2024
-                    </p>
                 </div>
-                <img src="assets/img/mountain.png" alt="Mountain" class="footer_img">
+                <img src="assets/img/dis4.png" alt="muebles" class="footer_img">
             </div>
         </footer>

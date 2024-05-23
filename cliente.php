@@ -14,6 +14,7 @@ require 'db_connection.php';
 <html>
 <head>
     <title>Panel de Cliente</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
     <link rel="stylesheet" href="assets/css/main.css">
     <link rel="icon" type="image/png" href="assets/img/LogoRESNOUNegroC.svg">
@@ -27,26 +28,21 @@ require 'db_connection.php';
     --beige: #b79e94;
     --fern: #a8bba2;
 }
-
-body {
-    background-color: var(--white);
-    color: var(--black);
-}
-
-.container {
-    justify-content: center;
-    padding: 20px;
-    margin-top: 100px; 
+    .container-cliente {
+        margin-top: 150px; 
     margin-bottom: 50px;
-    position: relative; 
-    z-index: 1; 
-}
+    display: flex;
+    justify-content: center;
+    text-align:center;
+    flex-direction: column;
+    align-items: center;
+    max-width: auto;
+        }
 
-h2 {
+        h2 {
     text-align: center;
     color: var(--green);
 }
-
 .textoBienvenida {
     font-size: 1.2em;
     color: var(--fern);
@@ -84,13 +80,14 @@ h2 {
     }
 }
 
+
     </style>
 </head>
 <body>
     
     <?php include 'header.php'; ?>
 
-<div class="container">
+<div class="container-cliente">
         <h2>Panel de Cliente</h2>
         <?php if (isset($_SESSION['user_id'])) : ?>
             <?php

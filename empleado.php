@@ -1,33 +1,26 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['user_id']) || $_SESSION['rol'] !== 'administrador') {
+if (!isset($_SESSION['user_id']) || $_SESSION['rol'] !== 'empleado') {
     header("Location: login.php");
     exit();
 }
 
-require 'db_connection.php';
+require 'db_connection.php'; 
 
 ?>
 
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel de Administrador</title>
+    <title>Panel de Empleado</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
     <link rel="stylesheet" href="assets/css/main.css">
     <link rel="icon" type="image/png" href="assets/img/LogoRESNOUNegroC.svg">
     <script src="https://kit.fontawesome.com/eb496ab1a0.js" crossorigin="anonymous"></script>
-   <style>
- 
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f8f9fa;
-    margin: 0;
-}
-
+    <style>
 .container {
     text-align: center;
     max-width: 800px;
@@ -62,7 +55,7 @@ h2, h3 {
     background-color: #333; 
 }
 
-.admin-links {
+.empleado-links {
     margin-top: 20px;
     margin-bottom: 20px;
     display: flex;
@@ -71,7 +64,7 @@ h2, h3 {
     align-items: center; 
 }
 
-.admin-link {
+.empleado-link {
     text-decoration: none;
     color: #495057;
     padding: 10px;
@@ -81,51 +74,49 @@ h2, h3 {
     transition: background-color 0.3s, color 0.3s;
 }
 
-.admin-link:hover {
+.empleado-link:hover {
     background-color: #000;
     color: #fff;
 }
 
-.admin-links::before {
+.empleado-links::before {
     content: "Mantenimiento";
     font-weight: bold;
     margin-bottom: 10px;
     color: #000;
 }
-
-
     </style>
 </head>
 <body>
+
 <?php include 'header.php'; ?>
 
 <div class="container">
-        <h2>Panel de Administrador</h2>
+        <h2>Panel de Empleado</h2>
         <?php if (isset($_SESSION['user_id'])) : ?>
             <?php
             $stmt_user = $pdo->prepare("SELECT nombre FROM usuarios WHERE id = ?");
             $stmt_user->execute([$_SESSION['user_id']]);
-            $admin = $stmt_user->fetch();
+            $empleado = $stmt_user->fetch();
             ?>
-            <p class="textoBienvenida">Bienvenido, <?php echo $admin['nombre']; ?></p>
+            <p class="textoBienvenida">Bienvenido, <?php echo $empleado['nombre']; ?></p>
         <?php endif; ?>
 
         
-        <div class="admin-links">
-            <a href="informe_usuarios.php" class="admin-link">Informe de Usuarios</a>
-            <a href="informe_articulos.php" class="admin-link">Mantenimiento de Clases</a>
-            <a href="estadisticas_pedidos.php" class="admin-link">Estadísticas de Reservas</a>
-            <a href="ventas.php" class="admin-link">Reservas del Mes</a>
+        <div class="empleado-links">
+            <a href="informe_articulos.php" class="empleado-link">Mantenimiento de Clases</a>
+            <a href="estadisticas_pedidos.php" class="empleado-link">Estadísticas</a>
+            <a href="mantenimiento_categorias.php" class="empleado-link">Mantenimiento de Reservas</a>
         </div>
 
     </div>
 
 
     <?php include 'footer.php'; ?>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>
 
-
-
-    
-  

@@ -110,11 +110,11 @@ header {
 }
 
 .menu__link:hover {
-  color: #66BB6A;
+  color: #525f48;
 }
 
 .menu__link.active {
-  color: #66BB6A;
+  color: #525f48;
   font-weight: bold;
 }
 
@@ -128,7 +128,7 @@ header {
 .btn__signup {
   border: 1px solid #201a1a;
   font-size: 1.6rem;
-  color: #5f9f49;
+  color: #b79e94;
   /*
     Button hover effect resource
     https://codepen.io/alticreation/pen/zBZwOP
@@ -147,7 +147,7 @@ header {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #315f33;
+  background-color: #525f48;
   z-index: -2;
 }
 
@@ -158,7 +158,7 @@ header {
   left: 0;
   width: 0%;
   height: 100%;
-  background-color: #315f33;
+  background-color: #525f48;
   transition: all .3s;
   z-index: -1;
 }
@@ -191,7 +191,7 @@ header {
 }
 
 .hamburger-menu .line {
-  background-color: #66BB6A;
+  background-color: #525f48;
   height: .3rem;
   width: 100%;
   transition: all 0.3s;
@@ -271,7 +271,7 @@ header {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #66BB6A;
+  background-color: #525f48;
   z-index: -2;
 }
 
@@ -288,7 +288,7 @@ header {
 }
 
 .btn__hero:hover {
-  color: #66BB6A;
+  color: #525f48;
 }
 
 .btn__hero:hover:before {
@@ -370,7 +370,7 @@ header {
 }
 
 .opportunity.active {
-  background-color: #66BB6A;
+  background-color: #525f48;
 }
 
 .opportunity.active .opportunity__title,
@@ -415,7 +415,7 @@ header {
 
 .invest__description {
   margin-top: 1.5rem;
-  color: #324148;
+  color: #525f48;
   font-size: 1.8rem;
 }
 
@@ -439,7 +439,7 @@ header {
 }
 
 .invest__item__subtitle {
-  color: #66BB6A;
+  color: #525f48;
   font-size: 1.4rem;
   font-weight: 400;
   position: relative;
@@ -473,11 +473,11 @@ header {
 }
 
 .btn__invest {
-  color: #66BB6A;
+  color: #525f48;
   display: inline-block;
   width: 20rem;
   text-align: center;
-  box-shadow: 1px 10px 30px -10px #66bb6a;
+  box-shadow: 1px 10px 30px -10px #525f48;
   /*
     Button hover effect resource
     https://codepen.io/alticreation/pen/zBZwOP
@@ -507,7 +507,7 @@ header {
   left: 0;
   width: 0%;
   height: 100%;
-  background-color: #66BB6A;
+  background-color: #525f48;
   transition: all .3s;
   z-index: -1;
 }
@@ -524,7 +524,7 @@ header {
 /*End How Is Works*/
 .how-is-works {
   background: url("../img/how-is-works-bg.png") no-repeat;
-  background-color: #66BB6A;
+  background-color: #525f48;
   margin: auto;
 }
 
@@ -573,7 +573,7 @@ header {
 
 .progressbar__step.active {
   background-color: #ffffff;
-  color: #66BB6A;
+  color: #525f48;
 }
 
 .progressbar__step.active:not(:first-child)::after {
@@ -589,7 +589,7 @@ header {
   right: 100%;
   width: 13rem;
   height: 1px;
-  background-color: #ffffff;
+  background-color: #a8bba2;
   pointer-events: none;
 }
 
@@ -729,7 +729,7 @@ header {
 }
 
 .testimonial__name {
-  color: #66BB6A;
+  color: #525f48;
 }
 
 .testimonial__title {
@@ -757,9 +757,9 @@ header {
   padding: 1.5rem;
   outline: none;
   border: none;
-  background-color: #66BB6A;
+  background-color: #525f48;
   color: #ffffff;
-  box-shadow: 1px 10px 30px -10px #66bb6a;
+  box-shadow: 1px 10px 30px -10px #525f48;
 }
 
 .btn__testimonials.disable {
@@ -768,7 +768,7 @@ header {
 }
 
 /*End Testimonials*/
-/*Farm Invest */
+
 .farm-invest {
   margin: auto;
   padding: 5rem 2.5rem;
@@ -783,20 +783,17 @@ header {
 }
 
 .farm-invest__title span {
-  color: #66BB6A;
+  color: #525f48;
 }
 
 .btn__farm--invest {
-  border: 1px solid #66BB6A;
+  border: 1px solid #525f48;
   color: #ffffff;
   display: inline-block;
   min-width: 25rem;
   margin-top: 4rem;
-  box-shadow: 1px 10px 30px -10px #66bb6a;
-  /*
-    Button hover effect resource
-    https://codepen.io/alticreation/pen/zBZwOP
-    */
+  box-shadow: 1px 10px 30px -10px #525f48;
+
   display: inline-block;
   transition: all .3s;
   position: relative;
@@ -811,7 +808,7 @@ header {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #66BB6A;
+  background-color: #525f48;
   z-index: -2;
 }
 
@@ -828,7 +825,7 @@ header {
 }
 
 .btn__farm--invest:hover {
-  color: #66BB6A;
+  color: #525f48;
 }
 
 .btn__farm--invest:hover:before {
@@ -878,12 +875,12 @@ header {
 }
 
 .footer_nav__link:hover {
-  color: #66BB6A;
+  color: #525f48;
 }
 
 .footer__contact {
   flex: 1 0 28rem;
-  background-color: #66BB6A;
+  background-color: #525f48;
   padding: 5rem 5rem 10rem;
   color: #ffffff;
   display: flex;
@@ -906,7 +903,7 @@ header {
 .btn__signin {
   margin-top: 1.5rem;
   border: 1px solid #ffffff;
-  color: #66BB6A;
+  color: #525f48;
   /*
     Button hover effect resource
     https://codepen.io/alticreation/pen/zBZwOP
@@ -936,7 +933,7 @@ header {
   left: 0;
   width: 0%;
   height: 100%;
-  background-color: #66BB6A;
+  background-color: #525f48;
   transition: all .3s;
   z-index: -1;
 }
@@ -986,7 +983,7 @@ header {
     right: 0;
     width: 30rem;
     height: 100vh;
-    background-color: #66BB6A;
+    background-color: #525f48;
     z-index: 2;
     flex-direction: column;
     transform: translateX(40rem);

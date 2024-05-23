@@ -73,8 +73,17 @@ function iniciarSesion($usuario) {
     <title>Login</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
     <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="icon" type="image/png" href="assets/img/LogoRESNOUNegroC.svg">
     <script src="https://kit.fontawesome.com/eb496ab1a0.js" crossorigin="anonymous"></script>
     <style>
+        :root {
+    --black: #000000;
+    --white: #ffffff;
+    --green: #525f48;
+    --beige: #b79e94;
+    --fern: #a8bba2;
+}
+
   .login-container {
     background-color: #f7f7f7;
     display: flex;
@@ -110,7 +119,7 @@ function iniciarSesion($usuario) {
 }
 
 .form-container input[type="submit"] {
-    background-color: #66BB6A;
+    background-color: #525f48;
     color: #ffffff;
     border: none;
     padding: 1rem;
@@ -132,7 +141,7 @@ function iniciarSesion($usuario) {
 }
 
 .form-container .links a {
-    color: #66BB6A;
+    color: #525f48;
 }
 
 .form-container .links a:hover {

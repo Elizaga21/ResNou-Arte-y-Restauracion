@@ -43,10 +43,10 @@ header {
     cursor: pointer;
     transition: .2s all;
     &:hover {
-        color: $fern;
+        color: $beige;
     }
     &.active {
-        color: $fern;
+        color: $beige;
         font-weight: bold;
     }
 }
@@ -82,7 +82,7 @@ header {
 }
 
 .hamburger-menu .line {
-    background-color: $fern;
+    background-color: $beige;
     height: .3rem;
     width: 100%;
     -webkit-transition: all 0.3s;
@@ -141,7 +141,7 @@ header {
 .hero__description {
     font-size: 1.8rem;
     margin: 2.5rem 0 5rem;
-    color: $outer-space;
+    color: $green;
 }
 
 .btn__hero {
@@ -208,7 +208,7 @@ header {
     margin-top: 2.5rem;
     font-size: 1.8rem;
     font-weight: 400;
-    color: $outer-space;
+    color: $green;
 }
 
 .opportunities__body {
@@ -226,7 +226,7 @@ header {
     padding: 5rem 2.5rem 2.5rem;
     transition: all 0.3s ease-out;
     &.active {
-        background-color: $fern;
+        background-color: $beige;
         .opportunity__title,
         .opportunity__description {
             color: $white;
@@ -244,14 +244,14 @@ header {
 
 .opportunity__title {
     font-size: 1.8rem;
-    color: $outer-space;
+    color: $green;
     margin: 2.5rem 0;
 }
 
 .opportunity__description {
     font-size: 1.6rem;
     font-weight: 400;
-    color: $outer-space;
+    color: $green;
 }
 
 
@@ -274,7 +274,7 @@ header {
 
 .invest__description {
     margin-top: 1.5rem;
-    color: $limed-spruce;
+    color: $green;
     font-size: 1.8rem
 }
 
@@ -296,7 +296,7 @@ header {
 }
 
 .invest__item__subtitle {
-    color: $fern;
+    color: $beige;
     font-size: 1.4rem;
     font-weight: 400;
     position: relative;
@@ -328,7 +328,7 @@ header {
 }
 
 .btn__invest {
-    color: $fern;
+    color: $beige;
     display: inline-block;
     width: 20rem;
     text-align: center;
@@ -346,7 +346,7 @@ header {
 
 .how-is-works {
     background: url('../img/how-is-works-bg.png') no-repeat;
-    background-color: $fern;
+    background-color: $beige;
     margin: auto;
 }
 
@@ -393,7 +393,7 @@ header {
     position: relative;
     &.active {
         background-color: $white;
-        color: $fern;
+        color: $beige;
         &:not(:first-child)::after {
             height: 5px;
             transform: scaleX(0);
@@ -552,17 +552,17 @@ header {
 }
 
 .testimonial__name {
-    color: $fern;
+    color: $beige;
 }
 
 .testimonial__title {
-    color: $outer-space;
+    color: $green;
 }
 
 .testimonial__description {
     margin-top: 5rem;
     font-size: 1.8rem;
-    color: $limed-spruce;
+    color: $green;
 }
 
 .testimonials__footer {
@@ -580,12 +580,12 @@ header {
     padding: 1.5rem;
     outline: none;
     border: none;
-    background-color: $fern;
+    background-color: $beige;
     color: $white;
     @include btnShadow;
     &.disable {
         background-color: $white;
-        color: $outer-space;
+        color: $green;
     }
 }
 
@@ -607,12 +607,12 @@ header {
 .farm-invest__title {
     font-size: 3.6rem;
     span {
-        color: $fern;
+        color: $beige;
     }
 }
 
 .btn__farm--invest {
-    border: 1px solid $fern;
+    border: 1px solid $beige;
     color: $white;
     display: inline-block;
     min-width: 25rem;
@@ -674,7 +674,7 @@ header {
 
 .footer__contact {
     flex: 1 0 28rem;
-    background-color: $fern;
+    background-color: $beige;
     padding: 5rem 5rem 10rem;
     color: $white;
     display: flex;
@@ -696,7 +696,7 @@ header {
 .btn__signin {
     margin-top: 1.5rem;
     border: 1px solid $white;
-    color: $fern;
+    color: $beige;
     @include btnHoverAnimate($white,
     $fern,
     $white);

@@ -151,32 +151,32 @@
                 <h2>Clases de Dibujo y Pintura</h2>
                 <p>Viernes de 10:00 a 11:30</p>
                 <p>30€/mes</p>
-                <a href="enlace1.html" class="bonus-button">Bonos</a>
+                <a href="bonos.php?clase=dibujo_pintura" class="bonus-button">Bonos</a>
             </div>
         </div>
         <div class="product">
             <div class="img-container">
-                <img src="assets/img/clases/clase.jpeg" alt="Vinilo Estándar" class="default-img">
-                <img src="ruta/a/hover2.jpg" alt="Vinilo Estándar Hover" class="hover-img">
+                <img src="assets/img/clases/clase.jpeg" alt="Clase Restauracion" class="default-img">
+                <img src="ruta/a/hover2.jpg" alt="Clase Restauracion" class="hover-img">
             </div>
             <div class="description">
                 <h2>Clases de Restauración</h2>
                 <p>Los jueves con tres opciones de horario:</p>
                 <p>09:30 a 12:00 / 12:00 a 14:30 / 17:30 a 20:00</p>
                 <p>45€/mes</p>
-                <a href="enlace1.html" class="bonus-button">Bonos</a>
+                <a href="bonos.php?clase=restauracion" class="bonus-button">Bonos</a>
                  </div>
         </div>
         <div class="product">
             <div class="img-container">
-                <img src="assets/img/Designer (3).jpeg" alt="Vinilo Target" class="default-img">
-                <img src="assets/img/clases/Designer (4).jpeg" alt="Vinilo Target Hover" class="hover-img">
+                <img src="assets/img/Designer (3).jpeg" alt="Clase Arte" class="default-img">
+                <img src="assets/img/clases/Designer (4).jpeg" alt="Clase Arte" class="hover-img">
             </div>
             <div class="description">
                 <h2>Clases de Arte y Creatividad para niños</h2>
                 <p>Viernes de 17:30 a 19:00 y Sábado de 12:00 a 13:30</p>
                 <p>30€/mes</p>
-                <a href="enlace1.html" class="bonus-button">Bonos</a>           
+                <a href="bonos.php?clase=arte_creatividad_ninos" class="bonus-button">Bonos</a>
              </div>
         </div>
     </div>

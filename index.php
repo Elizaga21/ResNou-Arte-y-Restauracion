@@ -2,8 +2,19 @@
 include 'db_connection.php';
 session_start();
 
-
+if (count($_COOKIE) == 0) {
+    setcookie('test', 'test', time() + 3600, '/');
+    if (count($_COOKIE) == 0) {
+        $cookiesEnabled = false;
+    } else {
+        setcookie('test', '', time() - 3600, '/'); // Eliminar cookie de prueba
+        $cookiesEnabled = true;
+    }
+} else {
+    $cookiesEnabled = true;
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,11 +25,56 @@ session_start();
     <link rel="icon" type="image/png" href="assets/img/LogoRESNOUNegroC.svg">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
     <link rel="stylesheet" href="assets/css/main.css">
+
+    <style>
+        .cookie-consent {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #333;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+        }
+        .cookie-consent p {
+            margin: 0;
+        }
+        .cookie-button {
+            background-color: #ff6f61;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .cookie-button:hover {
+            background-color: #e65b50;
+        }
+    </style>
 </head>
 
 <body>
     <div class="container">
     <?php include 'header.php'; ?>
+
+       <!-- Mensaje de advertencia de cookies -->
+       <?php if (!$cookiesEnabled): ?>
+        <div id="cookieWarning" class="cookie-warning">
+            <p>Las cookies no están habilitadas en su navegador. Por favor, habilite las cookies para continuar utilizando este sitio web.</p>
+        </div>
+        <?php else: ?>
+        <!-- Popup de aceptación de cookies -->
+        <div id="cookieConsent" class="cookie-consent">
+            <div class="cookie-message">
+                <p>Utilizamos cookies para mejorar su experiencia en nuestro sitio web. Al continuar navegando, usted acepta nuestro uso de cookies. 
+                <a href="cookie-policy.html" target="_blank">Más información</a>.</p>
+                <button id="acceptCookies" class="cookie-button">Aceptar</button>
+            </div>
+        </div>
+        <?php endif; ?>
    
         <section class="hero w-120">
             <div class="hero__content">
@@ -319,7 +375,41 @@ session_start();
 
     </div>
     <script src="assets/js/main.js" type="module"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            function setCookie(name, value, days) {
+                var expires = "";
+                if (days) {
+                    var date = new Date();
+                    date.setTime(date.getTime() + (days*24*60*60*1000));
+                    expires = "; expires=" + date.toUTCString();
+                }
+                document.cookie = name + "=" + (value || "") + expires + "; path=/";
+            }
 
+            function getCookie(name) {
+                var nameEQ = name + "=";
+                var ca = document.cookie.split(';');
+                for(var i=0;i < ca.length;i++) {
+                    var c = ca[i];
+                    while (c.charAt(0)==' ') c = c.substring(1,c.length);
+                    if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+                }
+                return null;
+            }
+
+            if (getCookie('acceptCookies')) {
+                document.getElementById('cookieConsent').style.display = 'none';
+            } else {
+                document.getElementById('cookieConsent').style.display = 'block';
+            }
+
+            document.getElementById('acceptCookies').addEventListener('click', function() {
+                setCookie('acceptCookies', 'true', 365);
+                document.getElementById('cookieConsent').style.display = 'none';
+            });
+        });
+    </script>
 </body>
 
 </html>

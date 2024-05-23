@@ -32,27 +32,6 @@ if (!isset($_SESSION['nombre'])) {
   $_SESSION['nombre'] = obtenerNombreDeUsuario();
 }
 
-
-if (!function_exists('calcularPrecioTotal')) {
-function calcularPrecioTotal($carrito) {
-  $codigo_articulos = array_keys($carrito);
-  $placeholders = str_repeat('?,', count($codigo_articulos) - 1) . '?';
-
-  global $pdo; 
-
-  $stmt = $pdo->prepare("SELECT Codigo, Precio FROM Articulos WHERE Codigo IN ($placeholders)");
-  $stmt->execute($codigo_articulos);
-  $articulos = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-  $total_precio = 0;
-
-  foreach ($articulos as $articulo) {
-      $total_precio += $articulo['Precio'] * $carrito[$articulo['Codigo']];
-  }
-
-  return $total_precio;
-}
-}
 ?>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
@@ -79,39 +58,20 @@ function calcularPrecioTotal($carrito) {
     
         switch ($rolUsuario) {
             case 'administrador':
-                echo '<li><a href="admin.php"><strong>Mantenimiento</strong></a></li>';            
-                echo '<li><a href="estadisticas_pedidos.php"><strong>Reservas</strong></a></li>';
-                echo '<li><a href="ventas.php"><strong>Ventas</strong></a></li>';
-                echo '<li><a href="perfil.php"><strong>Mi Perfil</strong></a></li>';
+                echo '<li><a href="admin.php">Mantenimiento</a></li>';            
+                echo '<li><a href="estadisticas_pedidos.php">Reservas</a></li>';
+                echo '<li><a href="ventas.php">Ventas</a></li>';
+                echo '<li><a href="perfil.php">Perfil</a></li>';
                 break;
             case 'empleado':
-              echo '<li><a href="empleado.php"><strong>Mantenimiento</strong></a></li>';            
-                echo '<li><a href="mailings.php"><strong>Mailings</strong></a></li>';
-                echo '<li><a href="perfil.php"><strong>Mi Perfil</strong></a></li>';
+              echo '<li><a href="empleado.php">Mantenimiento</a></li>';            
+                echo '<li><a href="perfil.php">Perfil</a></li>';
                 break;
             case 'cliente':
-                echo '<li><a href="mis_pedidos.php"><strong>Mis Reservas</strong></a></li>';
-                echo '<li><a href="cliente.php"><strong>Mi Perfil</strong></a></li>';
-                echo '<li><a href="carrito.php" style="text-decoration: none;">';
-                echo '<i class="fas fa-shopping-cart"></i>'; 
-
-                // Mostrar el resumen del carrito si no está vacío
-            if (!empty($_SESSION['carrito'])) {
-              $total_unidades = array_sum($_SESSION['carrito']);
-              $total_precio = calcularPrecioTotal($_SESSION['carrito']); // Función para calcular el precio total
-
-              echo '<span style="margin-left: 5px;">' . $total_unidades . ' unidades | ' . $total_precio . ' €</span>';
-          }
-
+                echo '<li><a href="mis_pedidos.php">Reservas</a></li>';
+                echo '<li><a href="cliente.php">Perfil</a></li>';
+              
           echo '</a></li>';
-
-          // Verificar si se ha añadido un artículo al carrito desde esta página
-          if (isset($_GET['added_to_cart']) && $_GET['added_to_cart'] === 'true') {
-            
-            // Redirigir nuevamente a carrito.php sin el parámetro added_to_cart
-            header("Location: carrito.php");
-            exit();
-          }
           break;
 
 
@@ -123,18 +83,6 @@ function calcularPrecioTotal($carrito) {
         echo '<li><a href="cerrar_sesion.php"><strong>Cerrar Sesión</strong></a></li>';
     } else {
        
-// Enlace del carrito y resumen
-echo '<li><a href="carrito.php" style="text-decoration: none;">';
-echo '<i class="fas fa-shopping-cart"></i>';
-
-// Mostrar el resumen del carrito si no está vacío
-if (!empty($_SESSION['carrito'])) {
-    $total_unidades = array_sum($_SESSION['carrito']);
-    $total_precio = calcularPrecioTotal($_SESSION['carrito']); // Función para calcular el precio total
-
-    echo '<span style="margin-left: 5px;">' . $total_unidades . ' unidades | ' . $total_precio . ' €</span>';
-}
-
 echo '</a></li>';
     }
 

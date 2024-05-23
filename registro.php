@@ -88,17 +88,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html>
 <head>
     <title>Registro de usuario</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
     <link rel="stylesheet" href="assets/css/main.css">
     <script src="https://kit.fontawesome.com/eb496ab1a0.js" crossorigin="anonymous"></script>
     <style>
+:root {
+    --black: #000000;
+    --white: #ffffff;
+    --green: #525f48;
+    --beige: #b79e94;
+    --fern: #a8bba2;
+}
 
 .main-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 120px; 
         }
         .container {
     max-width: 400px;
@@ -106,6 +114,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     background-color: #f7f7f7;
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
 }
 
 .container h2 {
@@ -135,7 +144,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 .container input[type="submit"] {
-    background-color: #66BB6A;
+    background-color: #525f48;
     color: #ffffff;
     border: none;
     padding: 12px 20px;
@@ -148,17 +157,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     background-color: #5a9c5d;
 }
 
+.back-btn-container {
+    margin-top: 20px;
+}
+
+.back-btn {
+    background-color: #525f48;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.back-btn:hover {
+    background-color: #b79e94;
+}
+
+
 .error {
     color: #e74c3c;
     margin-top: 10px;
 }
 
-@media screen and (max-width: 600px) {
-    .container {
-        max-width: 100%;
-        padding: 10px;
-    }
-}
 
 
     </style>
@@ -187,6 +207,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 echo '<p class="error">' . $error . '</p>';
             }
         } ?>
+    </div>
+    <div class="back-btn-container">
+        <a href="login.php" class="back-btn">Volver</a>
     </div>
     </div>
     <?php include 'footer.php'; ?>

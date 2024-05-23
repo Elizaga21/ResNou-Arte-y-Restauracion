@@ -31,6 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <html>
             <head>
                 <title>Recuperar y Establecer Contraseña</title>
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
                 <link rel="stylesheet" href="assets/css/main.css">
                 <style>
@@ -39,7 +40,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     display: flex;
                     flex-direction: column;
                     min-height: 100vh;
-                    margin: 0;
+                    margin-top: 150px; 
+                    margin-bottom: 80px; 
                 }
                 
                 main {
@@ -47,6 +49,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     display: flex;
                     justify-content: center;
                     align-items: center;
+                    margin-top: 150px; 
+                    margin-bottom: 80px; 
                 }
                 
                 .password-recovery {
@@ -131,10 +135,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <html>
     <head>
         <title>Recuperar Contraseña</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
         <link rel="stylesheet" href="assets/css/main.css">
         <style>
         /* Estilos CSS */
+        :root {
+            --black: #000000;
+            --white: #ffffff;
+            --green: #525f48;
+            --beige: #b79e94;
+            --fern: #a8bba2;
+        }
         .password-recovery {
             max-width: 40rem;
             margin: auto;
@@ -142,6 +154,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             border-radius: 1rem;
             background-color: #f7f7f7;
             box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
+            margin-top: 150px; 
+            margin-bottom: 80px; 
         }
 
         .password-recovery__title {
@@ -163,7 +177,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             padding: 1rem;
             border: none;
             border-radius: 0.5rem;
-            background-color: #66BB6A;
+            background-color: #525f48;
             color: #fff;
             font-size: 1.6rem;
             cursor: pointer;

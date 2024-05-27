@@ -74,6 +74,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <!DOCTYPE html>
 <html lang="es">
 <head>
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crear Nuevo Usuario</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
     <link rel="stylesheet" href="assets/css/main.css">
@@ -93,17 +95,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
         .container-registro {
             margin-top: 150px; 
-            margin-bottom: 120px;
-            display: flex;
-            justify-content: center;
-            text-align:center;
-            flex-direction: column;
-            align-items: center;
-            max-width: auto;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            margin: 20px auto; 
+    margin-bottom: 150px;
+    display: flex;
+    justify-content: center;
+    text-align:center;
+    flex-direction: column;
+    padding: 20px;
+    align-items: center;
+    max-width: auto;
         }
 
         h2 {
@@ -113,30 +112,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         form {
             margin-top: 20px;
             display: grid;
-            grid-template-columns: repeat(2, 1fr); 
+            grid-template-columns: repeat(3, 1fr); 
             grid-gap: 15px; 
+            max-width: auto;
         }
 
-        input,
-        select {
-            margin-bottom: 15px;
-            width: 100%; 
-            box-sizing: border-box; 
-        }
+       
+input,
+select {
+    margin-bottom: 15px;
+    max-width: auto;
+    box-sizing: border-box; 
+    padding: 15px;
+    font-size: 16px; 
+}
 
-        input[type="submit"],
-        .back-button {
-            width: 100%; 
-            padding: 10px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
+input[type="submit"] {
+    background-color: #525f48;
+    color: #a8bba2;
+    padding: 5px 10px;
+    font-size: 14px; 
+    width: auto; 
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
 
         input[type="submit"] {
-            background-color: #000;
-            color: #ff0;
+            background-color: #525f48;
+            color: #a8bba2;
         }
 
         input[type="submit"]:hover {
@@ -144,8 +148,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         .back-button {
-            background-color: #333;
-            color: #ff0;
+            background-color: #525f48;
+            color: #a8bba2;
             display: block;
             text-align: center;
             text-decoration: none;
@@ -156,23 +160,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             margin-top: 10px;
         }
 
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px;
-            background-color: #000;
-            color: #ffffff;
-        }
         .nombre-tienda h1 {
             margin: 0;
             text-align: center;
             font-size: 28px;
-        }
-
-        .header-content {
-            display: flex;
-            align-items: center;
         }
 
         #menu-navegacion ul {
@@ -191,7 +182,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         #menu-navegacion ul li a {
-    color: #ffffff;
+    color: #b79e94;
     text-decoration: none;
     transition: color 0.3s; 
 }

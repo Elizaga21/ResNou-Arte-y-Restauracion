@@ -155,7 +155,7 @@ h2, h3 {
 }
 
 .action-link:hover {
-    color: #ff0; 
+    color: #a8bba2; 
 }
 
 .order-form {

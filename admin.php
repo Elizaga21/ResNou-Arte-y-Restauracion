@@ -122,7 +122,7 @@ h2 {
         
         <div class="admin-links">
             <a href="informe_usuarios.php" class="admin-link">Informe de Usuarios</a>
-            <a href="informe_clases.php" class="admin-link">Mantenimiento de Clases</a>
+            <a href="mantenimiento_categorias.php" class="admin-link">Mantenimiento de Clases</a>
             <a href="estadisticas_pedidos.php" class="admin-link">Estadísticas de Reservas</a>
             <a href="ventas.php" class="admin-link">Reservas del Mes</a>
         </div>

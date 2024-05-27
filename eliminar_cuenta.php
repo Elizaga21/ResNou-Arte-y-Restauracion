@@ -56,7 +56,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin: auto;
-    margin-top: 50px;
+    margin-top: 180px; 
+    margin-bottom: 100px;
 }
 
 .container-delete h2{

@@ -22,26 +22,35 @@ require 'db_connection.php';
     <script src="https://kit.fontawesome.com/eb496ab1a0.js" crossorigin="anonymous"></script>
    <style>
  
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f8f9fa;
-    margin: 0;
+:root {
+    --black: #000000;
+    --white: #ffffff;
+    --green: #525f48;
+    --beige: #b79e94;
+    --fern: #a8bba2;
 }
 
-.container {
+.container-admin {
+    margin-top: 180px; 
+    margin-bottom: 120px;
+    display: flex;
+    justify-content: center;
+    text-align:center;
+    flex-direction: column;
+    align-items: center;
+    max-width: auto;
+}
+
+h2 {
     text-align: center;
-    max-width: 800px;
-    width: 100%;
-    margin: auto;
-    padding: 20px;
+    color: var(--green);
 }
-
-h2, h3 {
-    color: #495057;
-}
-
-.welcome-text {
-    color: #28a745;
+.textoBienvenida {
+    font-size: 1.2em;
+    color: var(--fern);
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: 20px; 
 }
 
 .order-form {
@@ -63,34 +72,34 @@ h2, h3 {
 }
 
 .admin-links {
-    margin-top: 20px;
-    margin-bottom: 20px;
     display: flex;
     flex-wrap: wrap;
-    flex-direction: column; 
-    align-items: center; 
+    justify-content: center;
+    gap: 15px;
 }
 
 .admin-link {
+    display: block;
+    padding: 15px 25px;
+    background-color: var(--beige);
+    color: var(--black);
     text-decoration: none;
-    color: #495057;
-    padding: 10px;
-    margin: 5px;
-    border: 1px solid #000;
-    border-radius: 4px;
-    transition: background-color 0.3s, color 0.3s;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    font-weight: bold;
+    text-align: center;
 }
 
 .admin-link:hover {
-    background-color: #000;
-    color: #fff;
+    background-color: var(--fern);
+    color: var(--white);
 }
 
-.admin-links::before {
-    content: "Mantenimiento";
-    font-weight: bold;
-    margin-bottom: 10px;
-    color: #000;
+
+@media (max-width: 768px) {
+    .admin-links {
+        flex-direction: column;
+    }
 }
 
 
@@ -99,7 +108,7 @@ h2, h3 {
 <body>
 <?php include 'header.php'; ?>
 
-<div class="container">
+<div class="container-admin">
         <h2>Panel de Administrador</h2>
         <?php if (isset($_SESSION['user_id'])) : ?>
             <?php
@@ -113,7 +122,7 @@ h2, h3 {
         
         <div class="admin-links">
             <a href="informe_usuarios.php" class="admin-link">Informe de Usuarios</a>
-            <a href="informe_articulos.php" class="admin-link">Mantenimiento de Clases</a>
+            <a href="informe_clases.php" class="admin-link">Mantenimiento de Clases</a>
             <a href="estadisticas_pedidos.php" class="admin-link">Estadísticas de Reservas</a>
             <a href="ventas.php" class="admin-link">Reservas del Mes</a>
         </div>

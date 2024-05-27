@@ -1,6 +1,7 @@
 <?php
 session_start();
 require 'db_connection.php';
+require 'header.php';
 
 // Si el usuario ya está conectado, redirige a la página de inicio correspondiente
 if (isset($_SESSION['user_id'])) {
@@ -60,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 function iniciarSesion($usuario) {
     $_SESSION['user_id'] = $usuario['id'];
     $_SESSION['rol'] = $usuario['rol'];
-    $_SESSION['nombre'] = obtenerNombreDeUsuario();
+    $_SESSION['nombre'] = obtenerNombreDeUsuario(); 
 }
 ?>
 
@@ -153,7 +154,6 @@ function iniciarSesion($usuario) {
     </style>
 </head>
 <body>
-<?php include 'header.php'; ?>
     <div class="login-container">
         <div class="form-container">
             <h2>Iniciar sesión</h2>

@@ -30,7 +30,7 @@ require 'db_connection.php';
 }
     .container-cliente {
         margin-top: 150px; 
-    margin-bottom: 50px;
+    margin-bottom: 120px;
     display: flex;
     justify-content: center;
     text-align:center;
@@ -101,9 +101,8 @@ require 'db_connection.php';
         
         <div class="cliente-links">
             <a href="perfil.php" class="cliente-link">Perfil</a>
-            <a href="mis_pedidos.php" class="cliente-link"> Estado Reserva</a>
-            <a href="articulos_comprados.php" class="cliente-link">Tus clases compradas</a>
-            <a href="devolucion.php" class="cliente-link">Política de Devolución</a>
+            <a href="mis_reservas.php" class="cliente-link"> Estado Reserva</a>
+            <a href="clases_compradas.php" class="cliente-link">Tus clases compradas</a>
             <a href="eliminar_cuenta.php" class="cliente-link">Eliminar Cuenta</a>
 
 

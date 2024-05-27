@@ -65,9 +65,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/eb496ab1a0.js" crossorigin="anonymous"></script>
     <style>
+
+:root {
+    --black: #000000;
+    --white: #ffffff;
+    --green: #525f48;
+    --beige: #b79e94;
+    --fern: #a8bba2;
+}
                 .form-column {
-            display: inline-block;
+            display: inline-grid;
+            margin-bottom: 20px; 
             vertical-align: top; 
+            justify-content: space-around;
             margin-right: 20px; 
         }
         
@@ -87,6 +97,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             max-width: 800px;
             width: 90%;
             margin: 50px auto;
+            margin-top: 180px; 
+            margin-bottom: 120px;
             padding: 20px;
             background-color: #fff;
             border: 1px solid #ddd;
@@ -96,12 +108,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         #container h2 {
-            color: #495057;
+            color: #525f48;
         }
 
         input[type="submit"] {
-            background-color: #000;
-            color: #ffc107;
+            background-color: #525f48;
+            color: #b79e94;
             padding: 10px 15px;
             border: none;
             border-radius: 4px;

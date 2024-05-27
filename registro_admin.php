@@ -75,23 +75,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html lang="es">
 <head>
     <title>Crear Nuevo Usuario</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="icon" type="image/png" href="assets/img/LogoRESNOUNegroC.svg">
     <script src="https://kit.fontawesome.com/eb496ab1a0.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <style>
-   body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f8f9fa;
-            margin: 0;
-        }
 
-        .container {
-            max-width: 800px; 
-            width: 100%;
-            padding: 20px;
-            background-color: #fff;
+
+:root {
+    --black: #000000;
+    --white: #ffffff;
+    --green: #525f48;
+    --beige: #b79e94;
+    --fern: #a8bba2;
+}
+        .container-registro {
+            margin-top: 150px; 
+            margin-bottom: 120px;
+            display: flex;
+            justify-content: center;
+            text-align:center;
+            flex-direction: column;
+            align-items: center;
+            max-width: auto;
             border: 1px solid #ddd;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -99,7 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         h2 {
-            color: #495057;
+            color: #525f48;
         }
 
         form {
@@ -197,7 +205,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
 <?php include 'header.php'; ?>
-    <div class="container">
+    <div class="container-registro">
         <h2>Crear Nuevo Usuario</h2>
         <?php if (isset($error_message)) : ?>
             <p class="error"><?php echo $error_message; ?></p>

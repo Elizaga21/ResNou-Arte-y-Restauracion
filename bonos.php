@@ -184,7 +184,7 @@ $user_id = $_SESSION['user_id'];
             echo "<p><strong>Dia:</strong> {$claseDetails['Dia']}</p>";
             echo "<p><strong>Precio del Bono {$bono}:</strong> {$precioBono}€</p>";
             echo "</div>";
-            echo "<a href='reserva.php?clase={$claseDetails['Nombre']}&bono={$bono}' class='bonus-button'>Reservar</a>";
+            echo "<a href='reservar.php?clase={$claseDetails['Nombre']}&bono={$bono}' class='bonus-button'>Reservar</a>";
             echo "</div>";
         } else {
             echo "La clase seleccionada no existe.";

@@ -21,21 +21,38 @@ require 'db_connection.php';
     <link rel="icon" type="image/png" href="assets/img/LogoRESNOUNegroC.svg">
     <script src="https://kit.fontawesome.com/eb496ab1a0.js" crossorigin="anonymous"></script>
     <style>
-.container {
-    text-align: center;
-    max-width: 800px;
-    width: 100%;
-    margin: auto;
+         :root {
+    --black: #000000;
+    --white: #ffffff;
+    --green: #525f48;
+    --beige: #b79e94;
+    --fern: #a8bba2;
+}
+.container-empleado {
+    margin-top: 160px; 
+    margin-bottom: 150px;
+    display: flex;
+    justify-content: center;
+    text-align:center;
+    flex-direction: column;
     padding: 20px;
+    align-items: center;
+    max-width: auto;
 }
 
 h2, h3 {
-    color: #495057;
+    text-align: center;
+    color: var(--green);
+    margin-bottom: 20px;
+
 }
 
 .welcome-text {
-    color: #28a745;
-}
+    font-size: 1.2em;
+    color: var(--fern);
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: 20px; }
 
 .order-form {
     margin-top: 20px;
@@ -56,34 +73,34 @@ h2, h3 {
 }
 
 .empleado-links {
-    margin-top: 20px;
-    margin-bottom: 20px;
     display: flex;
     flex-wrap: wrap;
-    flex-direction: column; 
-    align-items: center; 
+    margin-top: 20px;
+    justify-content: center;
+    gap: 15px;
 }
 
 .empleado-link {
+    display: block;
+    padding: 15px 25px;
+    background-color: var(--beige);
+    color: var(--black);
     text-decoration: none;
-    color: #495057;
-    padding: 10px;
-    margin: 5px;
-    border: 1px solid #000;
-    border-radius: 4px;
-    transition: background-color 0.3s, color 0.3s;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    font-weight: bold;
+    text-align: center;
 }
 
 .empleado-link:hover {
-    background-color: #000;
-    color: #fff;
+    background-color: var(--fern);
+    color: var(--white);
 }
 
-.empleado-links::before {
-    content: "Mantenimiento";
-    font-weight: bold;
-    margin-bottom: 10px;
-    color: #000;
+@media (max-width: 768px) {
+    .empleado-links  {
+        flex-direction: column;
+    }
 }
     </style>
 </head>
@@ -91,7 +108,7 @@ h2, h3 {
 
 <?php include 'header.php'; ?>
 
-<div class="container">
+<div class="container-empleado">
         <h2>Panel de Empleado</h2>
         <?php if (isset($_SESSION['user_id'])) : ?>
             <?php
@@ -104,10 +121,9 @@ h2, h3 {
 
         
         <div class="empleado-links">
-            <a href="informe_articulos.php" class="empleado-link">Mantenimiento de Clases</a>
-            <a href="estadisticas_pedidos.php" class="empleado-link">Estadísticas</a>
-            <a href="mantenimiento_categorias.php" class="empleado-link">Mantenimiento de Reservas</a>
-        </div>
+        <a href="mantenimiento_categorias.php" class="empleado-link">Mantenimiento de Clases</a>
+        <a href="estadisticas_pedidos.php" class="empleado-link">Estadísticas de Reservas</a>
+      </div>
 
     </div>
 

@@ -128,7 +128,7 @@ header {
 .btn__signup {
   border: 1px solid #201a1a;
   font-size: 1.6rem;
-  color: #b79e94;
+  color: #ffffff;
   /*
     Button hover effect resource
     https://codepen.io/alticreation/pen/zBZwOP
@@ -164,7 +164,7 @@ header {
 }
 
 .btn__signup:hover {
-  color: #ffffff;
+  color: #b79e94;
 }
 
 .btn__signup:hover:before {

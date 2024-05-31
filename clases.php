@@ -1,3 +1,9 @@
+<?php
+session_start(); // Iniciar la sesión
+require 'db_connection.php';
+
+
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -151,7 +157,9 @@
                 <h2>Clases de Dibujo y Pintura</h2>
                 <p>Viernes de 10:00 a 11:30</p>
                 <p>30€/mes</p>
-                <a href="bonos.php?clase=dibujo_pintura" class="bonus-button">Bonos</a>
+                <p>1 sesión semanal</p>
+                <a href="bonos.php?clase=Clase de Pintura y Dibujo para Adultos&bono=6" class="bonus-button">Bono 6 clases</a>
+            <a href="bonos.php?clase=Clase de Pintura y Dibujo para Adultos&bono=10" class="bonus-button">Bono 10 clases</a>
             </div>
         </div>
         <div class="product">
@@ -164,7 +172,10 @@
                 <p>Los jueves con tres opciones de horario:</p>
                 <p>09:30 a 12:00 / 12:00 a 14:30 / 17:30 a 20:00</p>
                 <p>45€/mes</p>
-                <a href="bonos.php?clase=restauracion" class="bonus-button">Bonos</a>
+                <p>1 sesión semanal</p>
+                <a href="bonos.php?clase=Clase+Restauración+para+Adultos&bono=6" class="bonus-button">Bono 6 clases</a>
+<a href="bonos.php?clase=Clase+Restauración+para+Adultos&bono=10" class="bonus-button">Bono 10 clases</a>
+
                  </div>
         </div>
         <div class="product">
@@ -176,7 +187,9 @@
                 <h2>Clases de Arte y Creatividad para niños</h2>
                 <p>Viernes de 17:30 a 19:00 y Sábado de 12:00 a 13:30</p>
                 <p>30€/mes</p>
-                <a href="bonos.php?clase=arte_creatividad_ninos" class="bonus-button">Bonos</a>
+                <p>1 sesión semanal</p>
+                <a href="bonos.php?clase=Clase de Arte para Niños&bono=6" class="bonus-button">Bono 6 clases</a>
+                <a href="bonos.php?clase=Clase de Arte para Niños&bono=10" class="bonus-button">Bono 10 clases</a>
              </div>
         </div>
     </div>

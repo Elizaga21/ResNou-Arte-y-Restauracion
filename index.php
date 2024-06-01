@@ -84,7 +84,7 @@ if (count($_COOKIE) == 0) {
                         Restauramos todas tus antigüedades, muebles y objetos. ¿Qué cuentas cuando enseñas tu casa? Llénala de objetos especiales, con historia, con tu identidad y tus valores. 
                         La velada será inolvidable.
                     </p>
-                    <a href="#" class="btn btn__hero">Reservar una cita</a>
+                    <a href="contacto.php" class="btn btn__hero">Reservar una cita</a>
                 </div>
                 <div class="hero__img">
                     <img src="assets/img/home1.png" alt="">

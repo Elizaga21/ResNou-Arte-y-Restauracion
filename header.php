@@ -65,7 +65,7 @@ if (!isset($_SESSION['nombre'])) {
                             echo '<li class="menu__item"><a href="perfil.php" class="menu__link">Perfil</a></li>';
                             break;
                         case 'cliente':
-                            echo '<li class="menu__item"><a href="mis_pedidos.php" class="menu__link">Reservas</a></li>';
+                            echo '<li class="menu__item"><a href="mis_reservas.php" class="menu__link">Reservas</a></li>';
                             echo '<li class="menu__item"><a href="cliente.php" class="menu__link">Perfil</a></li>';
                             break;
                         default:

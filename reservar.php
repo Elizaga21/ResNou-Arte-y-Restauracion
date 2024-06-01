@@ -41,7 +41,7 @@ if (isset($_SESSION['user_id']) && $_SESSION['rol'] === 'cliente') {
             $stmt_reserva->execute([$user_id, $clase_id, $fecha, $direccion, $localidad, $provincia, $pais, $codpos, $formaPago]);
 
             // Redirigir al usuario a una página de éxito
-            header("Location: reserva_exitosa.php");
+            header("Location: confirmar_reserva.php");
             exit();
         } else {
             // Manejar el caso en que no se encuentre la clase
@@ -106,22 +106,54 @@ if (isset($_SESSION['user_id']) && $_SESSION['rol'] === 'cliente') {
     background-size: 16px;
 }
 
-.form-group button[type="submit"] {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    background-color: var(--fern);
-    color: var(--white);
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-}
 
-.form-group button[type="submit"]:hover {
-    background-color: var(--beige);
-}
+    .form-group .btn__hero[type="submit"] {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #66BB6A;
+        color: #ffffff;
+        font-size: 1.8rem;
+        box-shadow: 1px 10px 30px -10px #66bb6a;
+        background-color: #66BB6A;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all .3s;
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+    }
+
+    .form-group .btn__hero:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #525f48;
+        z-index: -2;
+    }
+
+    .form-group .btn__hero:before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0%;
+        height: 100%;
+        background-color: #ffffff;
+        transition: all .3s;
+        z-index: -1;
+    }
+
+    .form-group .btn__hero:hover {
+        color: #525f48;
+    }
+
+    .form-group .btn__hero:hover:before {
+        width: 100%;
+    }
     </style>
 </head>
 <body>
@@ -165,7 +197,7 @@ if (isset($_SESSION['user_id']) && $_SESSION['rol'] === 'cliente') {
                     <option value="Efectivo en local">Efectivo en local</option>
                 </select>
             </div>
-            <button type="submit" class="form-group button">Reservar</button>
+            <button type="submit" class="form-group btn__hero">Reservar</button>
         </form>
     </div>
 

@@ -24,6 +24,9 @@ if (isset($_SESSION['user_id']) && $_SESSION['rol'] === 'cliente') {
         echo "No se encontró la reserva.";
         exit();
     }
+}   if ($reserva['FormaPago'] === 'Tarjeta de Crédito') {
+    header("Location: pasarela.php");
+    exit();
 } else {
     echo "Acceso denegado.";
     exit();

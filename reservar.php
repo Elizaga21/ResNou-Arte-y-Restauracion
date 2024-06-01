@@ -43,7 +43,7 @@ if (isset($_SESSION['user_id']) && $_SESSION['rol'] === 'cliente') {
             // Redirigir al usuario a una página de éxito
             header("Location: confirmar_reserva.php");
             exit();
-        } else {
+        }   else {
             // Manejar el caso en que no se encuentre la clase
             echo "La clase seleccionada no existe.";
         }

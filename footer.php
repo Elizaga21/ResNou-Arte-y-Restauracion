@@ -25,7 +25,7 @@
                             <a href="#" class="footer_nav__link">Proceso Restauración</a>
                         </li>
                         <li class="footer_nav__item">
-                            <a href="#" class="footer_nav__link">Precios</a>
+                            <a href="clases.php" class="footer_nav__link">Precios</a>
                         </li>
                         <li class="footer_nav__item">
                             <a href="login.php" class="footer_nav__link">Login</a>

@@ -22,11 +22,12 @@ function obtenerClasePorID($pdo, $claseID) {
 }
 
 // Función para actualizar una clase
-function actualizarClase($pdo, $claseID, $nombre, $descripcion, $fechaHoraInicio, $duracionMinutos, $precio, $materiales, $categoria, $cupoMaximo, $plazasReservadas) {
+function actualizarClase($pdo, $claseID, $nombre, $descripcion, $dia, $hora, $duracionMinutos, $precio, $materiales, $categoria, $cupoMaximo, $plazasReservadas) {
     $stmt = $pdo->prepare("UPDATE clases SET 
                            Nombre = ?,
                            Descripcion = ?,
-                           FechaHoraInicio = ?,
+                           Dia = ?,
+                           Hora = ?,
                            DuracionMinutos = ?,
                            Precio = ?,
                            Materiales = ?,
@@ -34,13 +35,13 @@ function actualizarClase($pdo, $claseID, $nombre, $descripcion, $fechaHoraInicio
                            CupoMaximo = ?,
                            PlazasReservadas = ?
                            WHERE ClaseID = ?");
-    return $stmt->execute([$nombre, $descripcion, $fechaHoraInicio, $duracionMinutos, $precio, $materiales, $categoria, $cupoMaximo, $plazasReservadas, $claseID]);
+    return $stmt->execute([$nombre, $descripcion, $dia, $hora, $duracionMinutos, $precio, $materiales, $categoria, $cupoMaximo, $plazasReservadas, $claseID]);
 }
 
 // Función para insertar una nueva clase
-function insertarClase($pdo, $nombre, $descripcion, $fechaHoraInicio, $duracionMinutos, $precio, $materiales, $categoria, $cupoMaximo) {
-    $stmt = $pdo->prepare("INSERT INTO clases (Nombre, Descripcion, FechaHoraInicio, DuracionMinutos, Precio, Materiales, Categoria, CupoMaximo) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-    return $stmt->execute([$nombre, $descripcion, $fechaHoraInicio, $duracionMinutos, $precio, $materiales, $categoria, $cupoMaximo]);
+function insertarClase($pdo, $nombre, $descripcion, $dia, $hora, $duracionMinutos, $precio, $materiales, $categoria, $cupoMaximo) {
+    $stmt = $pdo->prepare("INSERT INTO clases (Nombre, Descripcion, Dia, Hora, DuracionMinutos, Precio, Materiales, Categoria, CupoMaximo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    return $stmt->execute([$nombre, $descripcion, $dia, $hora, $duracionMinutos, $precio, $materiales, $categoria, $cupoMaximo]);
 }
 
 // Función para eliminar una clase por su ID
@@ -60,7 +61,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $claseID = $_POST['clase_id'];
                 $nombre = $_POST['nombre'];
                 $descripcion = $_POST['descripcion'];
-                $fechaHoraInicio = $_POST['fecha_hora_inicio'];
+                $dia = $_POST['dia'];
+                $hora = $_POST['hora'];
                 $duracionMinutos = $_POST['duracion_minutos'];
                 $precio = $_POST['precio'];
                 $materiales = $_POST['materiales'];
@@ -68,7 +70,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $cupoMaximo = $_POST['cupo_maximo'];
                 $plazasReservadas = $_POST['plazas_reservadas'];
 
-                if (actualizarClase($pdo, $claseID, $nombre, $descripcion, $fechaHoraInicio, $duracionMinutos, $precio, $materiales, $categoria, $cupoMaximo, $plazasReservadas)) {
+                if (actualizarClase($pdo, $claseID, $nombre, $descripcion, $dia, $hora, $duracionMinutos, $precio, $materiales, $categoria, $cupoMaximo, $plazasReservadas)) {
+                    $_SESSION['mensaje_exito'] = "Clase actualizada correctamente.";
+                    echo "<script>window.location.href = 'mantenimiento_categorias.php';</script>"; // Redirige para evitar reenvío del formulario
+                    exit();
                 } else {
                     echo "Error al actualizar la clase.";
                 }
@@ -78,21 +83,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 // Procesar formulario de inserción
                 $nombre = $_POST['nombre'];
                 $descripcion = $_POST['descripcion'];
-                $fechaHoraInicio = $_POST['fecha_hora_inicio'];
+                $dia = $_POST['dia'];
+                $hora = $_POST['hora'];
                 $duracionMinutos = $_POST['duracion_minutos'];
                 $precio = $_POST['precio'];
                 $materiales = $_POST['materiales'];
                 $categoria = $_POST['categoria'];
                 $cupoMaximo = $_POST['cupo_maximo'];
 
-                if (insertarClase($pdo, $nombre, $descripcion, $fechaHoraInicio, $duracionMinutos, $precio, $materiales, $categoria, $cupoMaximo)) {
+                if (insertarClase($pdo, $nombre, $descripcion, $dia, $hora, $duracionMinutos, $precio, $materiales, $categoria, $cupoMaximo)) {
                     $_SESSION['mensaje_exito'] = "Clase insertada correctamente.";
                     echo "<script>window.location.href = 'mantenimiento_categorias.php';</script>"; // Redirige para evitar reenvío del formulario
                     exit();
                 } else {
                     echo "Error al insertar la clase.";
                 }
-                
                 break;
 
             case 'eliminar':
@@ -100,6 +105,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $claseID = $_POST['clase_id'];
 
                 if (eliminarClase($pdo, $claseID)) {
+                    $_SESSION['mensaje_exito'] = "Clase eliminada correctamente.";
+                    echo "<script>window.location.href = 'mantenimiento_categorias.php';</script>"; // Redirige para evitar reenvío del formulario
+                    exit();
                 } else {
                     echo "Error al eliminar la clase.";
                 }
@@ -126,141 +134,121 @@ $clases = obtenerClases($pdo);
     <link rel="icon" type="image/png" href="assets/img/LogoRESNOUNegroC.svg">
     <script src="https://kit.fontawesome.com/eb496ab1a0.js" crossorigin="anonymous"></script>
     <style>
-    :root {
+:root {
     --black: #000000;
     --white: #ffffff;
     --green: #525f48;
     --beige: #b79e94;
     --fern: #a8bba2;
 }
+
 .container-clase {
-    margin-top: 160px; 
-    margin-bottom: 150px;
-    display: flex;
-    justify-content: center;
-    text-align:center;
-    flex-direction: column;
+    max-width: 900px;
+    margin: 50px auto;
+    margin-top: 140px;
+    background-color: var(--white);
     padding: 20px;
-    align-items: center;
-    max-width: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 h2, h3 {
-    color: #000000;
-    margin-bottom: 15px;
+    color: var(--green);
+    text-align: center;
+    margin-bottom: 30px;
 }
 
-/* Estilos del formulario */
 form {
-    background-color: #525f48;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
+    border: 1px solid var(--beige);
+    padding: 20px;
+    border-radius: 10px;
+    transition: border-color 0.3s;
 }
 
-form label {
+form:hover {
+    border-color: var(--green);
+}
+
+label {
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: var(--black);
 }
 
-form input,
-form textarea {
-    width: 100%;
+input[type="text"], input[type="number"], input[type="time"], textarea, select {
+    width: calc(100% - 22px);
     padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
+    margin-bottom: 20px;
+    border: 1px solid var(--beige);
+    border-radius: 5px;
+    transition: border-color 0.3s;
 }
 
-form input[type="checkbox"] {
-    margin-top: 5px;
+input[type="text"]:focus, input[type="number"]:focus, input[type="time"]:focus, textarea:focus, select:focus {
+    border-color: var(--green);
 }
 
-form input[type="submit"] {
-    background-color: #a8bba2;
-    color: #fff;
-    padding: 12px 20px; 
+button {
+    background-color: var(--green);
+    color: var(--white);
     border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
 }
 
-
-form input[type="submit"]:hover {
-    background-color: #b79e94;
+button:hover {
+    background-color: var(--beige);
 }
 
-/* Estilos de la lista de categorías */
-.lista-categoria {
-    list-style: none;
-    padding: 0;
-}
-
-.lista-categoria li {
+.clase {
     margin-bottom: 20px;
-    background-color: #525f48;
-    padding: 15px;
-    border-radius: 15px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    padding: 20px;
+    background-color: var(--fern);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.lista-categoria li div {
-    flex-grow: 1; 
+.clase:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
-/* Estilos de los botones de actualizar y eliminar */
-.lista-categoria li form[style="display: inline;"] {
-    display: flex;
+hr {
+    border: 0;
+    height: 1px;
+    background: var(--beige);
+    margin: 20px 0;
 }
 
+/* Responsive Styles */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
 
-/* Estilos de los botones de actualizar y eliminar */
-.lista-categoria li form[style="display: inline;"] input[type="submit"] {
-    background-color: #525f48;
-    color: #fff;
-    padding: 8px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-left: 10px;
-    margin-right: 10px;
+    .container-clase {
+        padding: 15px;
+    }
+
+    form, .clase {
+        padding: 15px;
+    }
+
+    input[type="text"], input[type="number"], input[type="time"], textarea, select {
+        width: calc(100% - 20px);
+        margin-bottom: 15px;
+    }
+
+    button {
+        width: 100%;
+        padding: 15px;
+    }
 }
-
-/* Estilos de los botones de actualizar y eliminar */
-<!-- Estilos de los botones de actualizar y eliminar -->
-.lista-categoria li form[style="display: inline;"] input[type="submit"][value="Actualizar"] {
-    background-color: #000;
-    color: #fff;
-    padding: 12px 20px;
-}
-
-.lista-categoria li form[style="display: inline;"] input[type="submit"][value="Eliminar"] {
-    background-color: #525f48;
-    color: #fff;
-    padding: 12px 20px;
-}
-
-/* Estilo para el botón "Actualizar" */
-.lista-categoria li form[style="display: inline;"] .btn-actualizar {
-    background-color: #525f48;
-    color: #fff;
-    padding: 12px 20px;
-}
-
-/* Estilo para el botón "Eliminar" */
-.lista-categoria li form[style="display: inline;"] .btn-eliminar {
-    background-color: #525f48;
-    color: #fff;
-    padding: 12px 20px;
-}
-
-
-
 
     </style>
 </head>
@@ -269,113 +257,98 @@ form input[type="submit"]:hover {
     <?php include 'header.php'; ?>
 
     <div class="container-clase">
-    <h2>Mantenimiento de Clases</h2>
+        <h2>Mantenimiento de Clases</h2>
 
-<!-- Formulario para insertar una nueva clase -->
-<form method="post">
-    <h3>Nueva Clase</h3>
-    <label>Nombre:</label>
-    <input type="text" name="nombre" required>
-    <label>Descripción:</label>
-    <textarea name="descripcion" rows="3"></textarea>
-    <label>Fecha y Hora de Inicio:</label>
-    <input type="datetime-local" name="fecha_hora_inicio" required>
-    <label>Duración (minutos):</label>
-    <input type="number" name="duracion_minutos" required>
-    <label>Precio:</label>
-    <input type="number" step="0.01" name="precio" required>
-    <label>Materiales:</label>
-    <textarea name="materiales" rows="3"></textarea>
-    <label>Categoría:</label>
-    <select name="categoria" required>
-        <option value="Arte para niños">Arte para niños</option>
-        <option value="Pintura y dibujo para Adultos">Pintura y dibujo para Adultos</option>
-        <option value="Restauración para Adultos">Restauración para Adultos</option>
-    </select>
-    <label>Cupo Máximo:</label>
-    <input type="number" name="cupo_maximo" required>
-    <input type="hidden" name="accion" value="insertar">
-    <input type="submit" value="Insertar Clase">
-</form>
-
-<!-- Lista de clases existentes con opciones de actualización y eliminación -->
-<h3>Clases Existentes</h3>
-<ul class="lista-clases">
-<?php foreach ($clases as $clase) : ?>
-<li>
-    <div style="display: flex; align-items: center;">
-        <div>
-            <strong>Nombre:</strong> <?php echo $clase['Nombre']; ?><br>
-            <strong>Fecha y Hora de Inicio:</strong> <?php echo $clase['FechaHoraInicio']; ?><br>
-            <strong>Precio:</strong> $<?php echo $clase['Precio']; ?>
-        </div>
-        <!-- Formulario para actualizar la clase actual -->
+        <!-- Formulario para insertar una nueva clase -->
         <form method="post">
-            <input type="hidden" name="clase_id" value="<?php echo $clase['ClaseID']; ?>">
-            <input type="hidden" name="nombre_actual" value="<?php echo $clase['Nombre']; ?>">
-            <input type="hidden" name="descripcion_actual" value="<?php echo $clase['Descripcion']; ?>">
-            <input type="hidden" name="fecha_hora_inicio_actual" value="<?php echo $clase['FechaHoraInicio']; ?>">
-            <input type="hidden" name="duracion_minutos_actual" value="<?php echo $clase['DuracionMinutos']; ?>">
-            <input type="hidden" name="precio_actual" value="<?php echo $clase['Precio']; ?>">
-            <input type="hidden" name="materiales_actual" value="<?php echo $clase['Materiales']; ?>">
-            <input type="hidden" name="categoria_actual" value="<?php echo $clase['Categoria']; ?>">
-            <input type="hidden" name="cupo_maximo_actual" value="<?php echo $clase['CupoMaximo']; ?>">
-            <input type="hidden" name="plazas_reservadas_actual" value="<?php echo $clase['PlazasReservadas']; ?>">
-
-            <input type="hidden" name="accion" value="actualizar">
-            <!-- Campos de entrada actualizados con los valores actuales -->
+            <h3>Nueva Clase</h3>
             <label>Nombre:</label>
-            <input type="text" name="nombre" value="<?php echo $clase['Nombre']; ?>" required>
+            <input type="text" name="nombre" required>
             <label>Descripción:</label>
-            <textarea name="descripcion" rows="3"><?php echo $clase['Descripcion']; ?></textarea>
-            <label>Fecha y Hora de Inicio:</label>
-            <input type="datetime-local" name="fecha_hora_inicio" value="<?php echo date('Y-m-d\TH:i', strtotime($clase['FechaHoraInicio'])); ?>" required>
+            <textarea name="descripcion" rows="3"></textarea>
+            <label>Día:</label>
+            <select name="dia" required>
+                <option value="Lunes">Lunes</option>
+                <option value="Martes">Martes</option>
+                <option value="Miércoles">Miércoles</option>
+                <option value="Jueves">Jueves</option>
+                <option value="Viernes">Viernes</option>
+                <option value="Sábado">Sábado</option>
+                <option value="Domingo">Domingo</option>
+            </select>
+            <label>Hora:</label>
+            <input type="time" name="hora" required>
             <label>Duración (minutos):</label>
-            <input type="number" name="duracion_minutos" value="<?php echo $clase['DuracionMinutos']; ?>" required>
+            <input type="number" name="duracion_minutos" required>
             <label>Precio:</label>
-            <input type="number" step="0.01" name="precio" value="<?php echo $clase['Precio']; ?>" required>
+            <input type="number" step="0.01" name="precio" required>
             <label>Materiales:</label>
-            <textarea name="materiales" rows="3"><?php echo $clase['Materiales']; ?></textarea>
+            <textarea name="materiales" rows="3"></textarea>
             <label>Categoría:</label>
             <select name="categoria" required>
-                <option value="Arte para niños" <?php echo ($clase['Categoria'] == 'Arte para niños') ? 'selected' : ''; ?>>Arte para niños</option>
-                <option value="Pintura y dibujo para Adultos" <?php echo ($clase['Categoria'] == 'Pintura y dibujo para Adultos') ? 'selected' : ''; ?>>Pintura y dibujo para Adultos</option>
-                <option value="Restauración para Adultos" <?php echo ($clase['Categoria'] == 'Restauración para Adultos') ? 'selected' : ''; ?>>Restauración para Adultos</option>
+                <option value="Arte para niños">Arte para niños</option>
+                <option value="Pintura y dibujo para Adultos">Pintura y dibujo para Adultos</option>
+                <option value="Restauración para Adultos">Restauración para Adultos</option>
             </select>
             <label>Cupo Máximo:</label>
-            <input type="number" name="cupo_maximo" value="<?php echo $clase['CupoMaximo']; ?>" required>
-            <label>Plazas Reservadas:</label>
-            <input type="number" name="plazas_reservadas" value="<?php echo $clase['PlazasReservadas']; ?>" required>
-
-            <input type="submit" class="btn-actualizar" value="Actualizar">
+            <input type="number" name="cupo_maximo" required>
+            <input type="hidden" name="accion" value="insertar">
+            <button type="submit">Insertar</button>
         </form>
 
-        <form method="post">
-            <input type="hidden" name="clase_id" value="<?php echo $clase['ClaseID']; ?>">
-            <input type="hidden" name="accion" value="eliminar">
-            <input type="submit" class="btn-eliminar" value="Eliminar" onclick="return confirm('¿Estás seguro?')">
-        </form>
-    </div>
-</li>
-<?php endforeach; ?>
-</ul>
+        <hr>
 
+    <!-- Listado de clases -->
+    <h3>Clases Existentes</h3>
+    <?php foreach ($clases as $clase): ?>
+        <div class="clase">
+            <form method="post">
+                <input type="hidden" name="clase_id" value="<?php echo $clase['ClaseID']; ?>">
+                <label>Nombre:</label>
+                <input type="text" name="nombre" value="<?php echo htmlspecialchars($clase['Nombre']); ?>" required>
+                <label>Descripción:</label>
+                <textarea name="descripcion" rows="3"><?php echo htmlspecialchars($clase['Descripcion']); ?></textarea>
+                <label>Día:</label>
+                <select name="dia" required>
+                    <option value="Lunes" <?php echo $clase['Dia'] == 'Lunes' ? 'selected' : ''; ?>>Lunes</option>
+                    <option value="Martes" <?php echo $clase['Dia'] == 'Martes' ? 'selected' : ''; ?>>Martes</option>
+                    <option value="Miércoles" <?php echo $clase['Dia'] == 'Miércoles' ? 'selected' : ''; ?>>Miércoles</option>
+                    <option value="Jueves" <?php echo $clase['Dia'] == 'Jueves' ? 'selected' : ''; ?>>Jueves</option>
+                    <option value="Viernes" <?php echo $clase['Dia'] == 'Viernes' ? 'selected' : ''; ?>>Viernes</option>
+                    <option value="Sábado" <?php echo $clase['Dia'] == 'Sábado' ? 'selected' : ''; ?>>Sábado</option>
+                    <option value="Domingo" <?php echo $clase['Dia'] == 'Domingo' ? 'selected' : ''; ?>>Domingo</option>
+                </select>
+                <label>Hora:</label>
+                <input type="time" name="hora" value="<?php echo htmlspecialchars($clase['Hora']); ?>" required>
+                <label>Duración (minutos):</label>
+                <input type="number" name="duracion_minutos" value="<?php echo htmlspecialchars($clase['DuracionMinutos']); ?>" required>
+                <label>Precio:</label>
+                <input type="number" step="0.01" name="precio" value="<?php echo htmlspecialchars($clase['Precio']); ?>" required>
+                <label>Materiales:</label>
+                <textarea name="materiales" rows="3"><?php echo htmlspecialchars($clase['Materiales']); ?></textarea>
+                <label>Categoría:</label>
+                <select name="categoria" required>
+                    <option value="Arte para niños" <?php echo $clase['Categoria'] == 'Arte para niños' ? 'selected' : ''; ?>>Arte para niños</option>
+                    <option value="Pintura y dibujo para Adultos" <?php echo $clase['Categoria'] == 'Pintura y dibujo para Adultos' ? 'selected' : ''; ?>>Pintura y dibujo para Adultos</option>
+                    <option value="Restauración para Adultos" <?php echo $clase['Categoria'] == 'Restauración para Adultos' ? 'selected' : ''; ?>>Restauración para Adultos</option>
+                </select>
+                <label>Cupo Máximo:</label>
+                <input type="number" name="cupo_maximo" value="<?php echo htmlspecialchars($clase['CupoMaximo']); ?>" required>
+                <label>Plazas Reservadas:</label>
+                <input type="number" name="plazas_reservadas" value="<?php echo htmlspecialchars($clase['PlazasReservadas']); ?>" required>
+                <input type="hidden" name="accion" value="actualizar">
+                <button type="submit">Actualizar</button>
+            </form>
+            <form method="post">
+                <input type="hidden" name="clase_id" value="<?php echo $clase['ClaseID']; ?>">
+                <input type="hidden" name="accion" value="eliminar">
+                <button type="submit" onclick="return confirm('¿Estás seguro de que deseas eliminar esta clase?');">Eliminar</button>
+            </form>
+        </div>
+        <hr>
+    <?php endforeach; ?>
 </div>
-
 <?php include 'footer.php'; ?>
 
-<script>
-<?php
-if (isset($_SESSION['mensaje_exito'])) {
-echo "alert('{$_SESSION['mensaje_exito']}');";
-unset($_SESSION['mensaje_exito']); // Limpiar la variable de sesión después de mostrar el mensaje
-}
-?>
-</script>
-
-
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>

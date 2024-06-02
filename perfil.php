@@ -29,13 +29,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $new_email = $_POST['email'];
     $new_contrasena = $user['contrasena']; 
 
+   
+    // Validación de Email
     if (!filter_var($new_email, FILTER_VALIDATE_EMAIL)) {
         $errors[] = "El formato del correo electrónico no es válido.";
     }
 
+    // Validación de Teléfono
     if (!preg_match('/^[0-9]{9}$/', $new_telefono)) {
         $errors[] = "El formato del número de teléfono no es válido.";
     }
+
+      // Validación de DNI
+      if (!preg_match('/^[0-9]{8}[A-Za-z]$/', $new_dni)) {
+        $errors[] = "El formato del DNI no es válido.";
+    }
+
 
     if (empty($errors)) {
         $update_stmt = $pdo->prepare("UPDATE usuarios SET 
@@ -72,101 +81,88 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     --green: #525f48;
     --beige: #b79e94;
     --fern: #a8bba2;
+    --primary-color: #4CAF50;
+    --secondary-color: #f5f5f5;
 }
-                .form-column {
-            display: inline-grid;
-            margin-bottom: 20px; 
-            vertical-align: top; 
-            justify-content: space-around;
-            margin-right: 20px; 
-        }
-        
-        form {
-            text-align: center; 
-        }
-        body {
-            background-color: #f8f9fa;
-        }
 
-        #content {
+#container-perfil {
+    max-width: 900px;
+    margin: 50px auto;
+    margin-top: 140px;
+    padding: 20px;
+    background-color: var(--white);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+#content {
     display: flex;
     flex-direction: column;
+    gap: 20px;
+}
+
+h2 {
+    text-align: center;
+    color: var(--green);
+    margin-bottom: 20px;
+}
+
+.form-column {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-column label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form-column input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+}
+
+input[type="submit"] {
+    background-color: var(--green);
+    color: var(--white);
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    background-color: #b79e94;
+}
+
+.password-input-container {
+    position: relative;
+    display: flex;
     align-items: center;
 }
-        #container {
-            max-width: 800px;
-            width: 90%;
-            margin: 50px auto;
-            margin-top: 180px; 
-            margin-bottom: 120px;
-            padding: 20px;
-            background-color: #fff;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            text-align: center; 
-        }
 
-        #container h2 {
-            color: #525f48;
-        }
-
-        input[type="submit"] {
-            background-color: #525f48;
-            color: #b79e94;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        input[type="submit"]:hover {
-            background-color: #333;
-        }
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        label {
-            font-weight: bold;
-        }
-
-        .form-column {
-            display: inline-block;
-            vertical-align: top;
-            margin-right: 20px;
-        }
-
-        button {
-            background-color: #000;
-            color: #fff;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            margin-top: 20px; 
-        }
-
-        button:hover {
-            background-color: #333;
-        }
-        .password-input-container {
-    position: relative;
-}
-
-.eye {
+.field-icon {
     position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
+    right: 15px;
     cursor: pointer;
 }
+
+@media (min-width: 600px) {
+    .form-column {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+}
+
     </style>
 <body>
 
-<div id="container">
+<div id="container-perfil">
     <div id="content">
         <h2>Mi Perfil</h2>
         <?php if (!empty($success_message)): ?>
@@ -204,6 +200,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <label for="localidad">Localidad:</label>
     <input type="text" id="localidad" name="localidad" value="<?= htmlspecialchars($user['localidad']) ?>" required>
     </div>
+    <br>
     <div class="form-column">
 
     <label for="provincia">Provincia:</label>

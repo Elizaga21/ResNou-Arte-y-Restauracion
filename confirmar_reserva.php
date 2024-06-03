@@ -20,17 +20,27 @@ if (isset($_SESSION['user_id']) && $_SESSION['rol'] === 'cliente') {
     $stmt_reserva->execute([$user_id]);
     $reserva = $stmt_reserva->fetch();
 
+    if ($reserva['FormaPago'] === 'Tarjeta de Crédito' || $reserva['FormaPago'] === 'Bizum') {
+        // Actualizar el estado de la reserva a "Pagado" en la base de datos
+        $stmt_actualizar_reserva = $pdo->prepare("UPDATE reservas SET EstadoReserva = 'Pagado' WHERE ReservaID = ?");
+        $stmt_actualizar_reserva->execute([$reserva['ReservaID']]);
+    }
+    if ($reserva['FormaPago'] === 'Efectivo en local') {
+        // Actualizar el estado de la reserva a "Pendiente" en la base de datos
+        $stmt_actualizar_reserva = $pdo->prepare("UPDATE reservas SET EstadoReserva = 'Pendiente' WHERE ReservaID = ?");
+        $stmt_actualizar_reserva->execute([$reserva['ReservaID']]);
+    }
+    
     if (!$reserva) {
         echo "No se encontró la reserva.";
         exit();
     }
-}   if ($reserva['FormaPago'] === 'Tarjeta de Crédito') {
+}   
+if ($reserva['FormaPago'] === 'Tarjeta de Crédito') {
     header("Location: pasarela.php");
     exit();
-} else {
-    echo "Acceso denegado.";
-    exit();
-}
+} 
+
 ?>
 
 <!DOCTYPE html>

@@ -8,15 +8,16 @@ if (isset($_SESSION['user_id']) && $_SESSION['rol'] === 'cliente') {
     $user_id = $_SESSION['user_id'];
 
     // Consultar la base de datos para obtener las reservas del usuario
-
     $stmt_reservas = $pdo->prepare("SELECT r.*, c.Nombre AS ClaseNombre, c.Descripcion AS ClaseDescripcion, c.Dia, c.Hora, 
-                                            CASE WHEN c.PrecioBono6 IS NOT NULL THEN c.PrecioBono6 ELSE c.PrecioBono10 END AS PrecioBono
-                                    FROM reservas r 
-                                    JOIN clases c ON r.ClaseID = c.ClaseID 
-                                    WHERE r.UsuarioID = ? AND r.activo = true
-                                    ORDER BY r.Fecha DESC");
-    $stmt_reservas->execute([$user_id]);
-    $reservas = $stmt_reservas->fetchAll();
+    r.PrecioBonoSeleccionado AS PrecioBono
+FROM reservas r 
+JOIN clases c ON r.ClaseID = c.ClaseID 
+WHERE r.UsuarioID = ? AND r.activo = true
+ORDER BY r.Fecha DESC");
+$stmt_reservas->execute([$user_id]);
+$reservas = $stmt_reservas->fetchAll();
+
+
 } else {
     echo "Acceso denegado.";
     exit();

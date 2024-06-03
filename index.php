@@ -146,7 +146,7 @@ if (count($_COOKIE) == 0) {
                             </p>
                         </div>
                         <div class="invest__item__footer">
-                            <a href="#" class="btn btn__invest">Ver Galería</a>
+                            <a href="galeria.php" class="btn btn__invest">Ver Galería</a>
                         </div>
                     </div>
                     <div class="invest__item">
@@ -161,7 +161,7 @@ if (count($_COOKIE) == 0) {
                             </p>
                         </div>
                         <div class="invest__item__footer">
-                            <a href="#" class="btn btn__invest">Ver clases</a>
+                            <a href="clases.php" class="btn btn__invest">Ver clases</a>
                         </div>
                     </div>
                 </div>
@@ -368,7 +368,7 @@ if (count($_COOKIE) == 0) {
 
         <section class="farm-invest w-105">
             <h2 class="farm-invest__title">Nuestros <span>Bonos de Clase</span> para aprender</h2>
-            <a href="#" class="btn btn__farm--invest">Reserva los bonos</a>
+            <a href="clases.php" class="btn btn__farm--invest">Reserva los bonos</a>
 
         </section>
         <?php include 'footer.php'; ?>

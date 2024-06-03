@@ -22,6 +22,11 @@ $user_id = $_SESSION['user_id'];
         // Verificar si se encontraron resultados y determinar el precio del bono seleccionado
         if($claseDetails) {
             $precioBono = ($bono == '6') ? $claseDetails['PrecioBono6'] : $claseDetails['PrecioBono10'];
+                $precioBonoSeleccionado = $precioBono;
+
+        // Insertar la reserva en la tabla de reservas solo con el precio del bono
+        $stmt_reserva = $pdo->prepare("INSERT INTO reservas (PrecioBonoSeleccionado) VALUES (?)");
+        $stmt_reserva->execute([$precioBonoSeleccionado]);
         } else {
             // Manejar el caso en que no se encuentre la clase
             echo "La clase seleccionada no existe.";

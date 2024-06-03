@@ -37,8 +37,19 @@ if (isset($_SESSION['user_id']) && $_SESSION['rol'] === 'cliente') {
             $clase_id = $clase_row['ClaseID'];
 
             // Insertar la reserva en la tabla reservas
-            $stmt_reserva = $pdo->prepare("INSERT INTO reservas (UsuarioID, ClaseID, Fecha, Direccion, Localidad, Provincia, Pais, CodPos, FormaPago, activo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, true)");
+            $stmt_reserva = $pdo->prepare("INSERT INTO reservas (UsuarioID, ClaseID, Fecha, Direccion, Localidad, Provincia, Pais, CodPos, FormaPago, activo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 1)");
             $stmt_reserva->execute([$user_id, $clase_id, $fecha, $direccion, $localidad, $provincia, $pais, $codpos, $formaPago]);
+
+             // Obtener el ID de la reserva insertada
+            $reserva_id = $pdo->lastInsertId();
+
+          // Obtener el precio del bono de la URL
+$precioBonoSeleccionado = $_GET['precio'];
+
+// Insertar la compra en la tabla compras
+$stmt_compra = $pdo->prepare("INSERT INTO compras (UsuarioID, ClaseID, FechaCompra, PrecioTotal, FormaPago) VALUES (?, ?, NOW(), ?, ?)");
+$stmt_compra->execute([$user_id, $clase_id, $precioBonoSeleccionado, $formaPago]);
+
 
             // Redirigir al usuario a una página de éxito
             header("Location: confirmar_reserva.php");

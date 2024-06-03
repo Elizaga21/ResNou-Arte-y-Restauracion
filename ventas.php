@@ -7,14 +7,20 @@ if (!isset($_SESSION['user_id']) || $_SESSION['rol'] !== 'administrador') {
     exit();
 }
 
-// Consulta para obtener información de ventas
-$sql = "SELECT r.Fecha, r.EstadoReserva, COUNT(*) as Cantidad, SUM(r.FormaPago) as TotalVentas, SUM(c.PrecioTotal) as TotalPedido
-        FROM reservas r
-        JOIN compras c ON r.CompraID = c.CompraID
-        GROUP BY r.Fecha, r.EstadoReserva";
+// Obtener los valores seleccionados del filtro de año y mes
+$anioSeleccionado = isset($_GET['anio']) ? $_GET['anio'] : date('Y');
+$mesSeleccionado = isset($_GET['mes']) ? $_GET['mes'] : date('m');
 
-$stmt = $pdo->query($sql);
+// Consulta para obtener información de ventas filtrada por año y mes
+$sql = "SELECT YEAR(FechaCompra) as Anio, MONTH(FechaCompra) as Mes, COUNT(*) as CantidadCompras, SUM(PrecioTotal) as TotalVentas
+        FROM compras
+        WHERE YEAR(FechaCompra) = :anioSeleccionado AND MONTH(FechaCompra) = :mesSeleccionado
+        GROUP BY YEAR(FechaCompra), MONTH(FechaCompra)";
+
+$stmt = $pdo->prepare($sql);
+$stmt->execute(['anioSeleccionado' => $anioSeleccionado, 'mesSeleccionado' => $mesSeleccionado]);
 $ventas = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -70,33 +76,77 @@ $ventas = $stmt->fetchAll(PDO::FETCH_ASSOC);
             color: #fff;
         }
 
+        .filtro {
+    margin-bottom: 20px;
+}
+
+.filtro label {
+    margin-right: 10px;
+}
+
+.filtro select,
+.filtro button {
+    padding: 8px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.filtro button {
+    background-color: #525f48;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.filtro button:hover {
+    background-color: #354037;
+}
+
+
     </style>
 </head>
 <body>
 
     <div class="container-reservas">
     <h2>Información de Ventas</h2>
-        <table>
-            <tr>
-                <th>Fecha</th>
-                <th>Estado de la Reserva</th>
-                <th>Cantidad de Reservas</th>
-                <th>Total Ventas</th>
-                <th>Total Pagado (€)</th>
-            </tr>
-            <?php foreach ($ventas as $venta): ?>
-                <tr>
-                    <td><?php echo $venta['Fecha']; ?></td>
-                    <td><?php echo $venta['EstadoReserva']; ?></td>
-                    <td><?php echo $venta['Cantidad']; ?></td>
-                    <td><?php echo $venta['TotalVentas']; ?></td>
-                    <td><?php echo $venta['TotalPedido']; ?></td>
-                </tr>
-            <?php endforeach; ?>
-        </table>
+    <br>
+    <div class="filtro">
+        <form method="GET" action="">
+            <label for="anio">Selecciona el año:</label>
+            <select name="anio" id="anio">
+                <?php for ($i = date('Y'); $i >= 2024; $i--): ?>
+                    <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+                <?php endfor; ?>
+            </select>
+            <label for="mes">Selecciona el mes:</label>
+            <select name="mes" id="mes">
+                <?php for ($m = 1; $m <= 12; $m++): ?>
+                    <option value="<?php echo $m; ?>"><?php echo date('F', mktime(0, 0, 0, $m, 1)); ?></option>
+                <?php endfor; ?>
+            </select>
+            <button type="submit">Filtrar</button>
+        </form>
+    </div>
+    <table>
+    <tr>
+        <th>Año</th>
+        <th>Mes</th>
+        <th>Cantidad de Compras</th>
+        <th>Total Ventas (€)</th>
+    </tr>
+    <?php foreach ($ventas as $venta): ?>
+        <tr>
+            <td><?php echo $venta['Anio']; ?></td>
+            <td><?php echo $venta['Mes']; ?></td>
+            <td><?php echo $venta['CantidadCompras']; ?></td>
+            <td><?php echo number_format($venta['TotalVentas'], 2, ',', '.'); ?></td>
+        </tr>
+    <?php endforeach; ?>
+</table>
+
     </div>
 
     <?php include 'footer.php'; ?>
 </body>
 </html>
-

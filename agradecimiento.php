@@ -1,3 +1,16 @@
+<?php
+session_start();
+require 'db_connection.php';
+
+if (!isset($_SESSION['user_id']) || $_SESSION['rol'] !== 'cliente') {
+    echo "Acceso denegado.";
+    exit();
+}
+
+$user_id = $_SESSION['user_id'];
+
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>

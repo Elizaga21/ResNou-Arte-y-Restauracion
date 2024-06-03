@@ -33,26 +33,40 @@ if (isset($_SESSION['user_id']) && $_SESSION['rol'] === 'cliente') {
     <link rel="stylesheet" href="assets/css/main.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
+       :root {
+            --black: #000000;
+            --white: #ffffff;
+            --green: #66BB6A;
+            --dark-green: #525f48;
+            --light-green: #A8BBA2;
+            --beige: #b79e94;
+        }
+
+
         .container-reservas {
             max-width: 800px;
             margin: 50px auto;
             margin-top: 140px;
             padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            background-color: #f9f9f9;
+            border-radius: 10px;
+            background-color: var(--white);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
         }
 
         .container-reservas h2 {
-            color: var(--fern);
+            color: var(--dark-green);
             margin-bottom: 20px;
             text-align: center;
+            font-size: 2em;
         }
 
         .reserva {
             border-bottom: 1px solid #ccc;
             padding-bottom: 10px;
             margin-bottom: 10px;
+            padding: 15px;
+            background-color: var(--light-green);
+            border-radius: 5px;
         }
 
         .reserva:last-child {
@@ -61,21 +75,22 @@ if (isset($_SESSION['user_id']) && $_SESSION['rol'] === 'cliente') {
         }
 
         .reserva h4 {
-            color: var(--fern);
+            color: var(--dark-green);
+            margin-bottom: 10px;
+            font-size: 1.5em;
         }
 
         .reserva p {
-            margin: 0;
+            margin: 5px 0;
         }
 
         .btn__hero {
             display: inline-block;
             padding: 10px 20px;
-            border: 1px solid #66BB6A;
-            color: #ffffff;
-            font-size: 1.8rem;
-            box-shadow: 1px 10px 30px -10px #66bb6a;
-            background-color: #66BB6A;
+            border: 1px solid var(--green);
+            color: var(--white);
+            font-size: 1.2rem;
+            background-color: var(--green);
             font-weight: bold;
             cursor: pointer;
             transition: all .3s;
@@ -84,6 +99,7 @@ if (isset($_SESSION['user_id']) && $_SESSION['rol'] === 'cliente') {
             z-index: 1;
             margin-top: 20px;
             text-align: center;
+            border-radius: 5px;
         }
 
         .btn__hero:after {
@@ -93,8 +109,9 @@ if (isset($_SESSION['user_id']) && $_SESSION['rol'] === 'cliente') {
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: #525f48;
+            background-color: var(--dark-green);
             z-index: -2;
+            transition: all .3s;
         }
 
         .btn__hero:before {
@@ -104,17 +121,37 @@ if (isset($_SESSION['user_id']) && $_SESSION['rol'] === 'cliente') {
             left: 0;
             width: 0%;
             height: 100%;
-            background-color: #ffffff;
+            background-color: var(--white);
             transition: all .3s;
             z-index: -1;
         }
 
         .btn__hero:hover {
-            color: #525f48;
+            color: var(--dark-green);
         }
 
         .btn__hero:hover:before {
             width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .container-reservas {
+                margin: 30px 15px;
+                padding: 15px;
+            }
+
+            .container-reservas h2 {
+                font-size: 1.5em;
+            }
+
+            .reserva h4 {
+                font-size: 1.2em;
+            }
+
+            .btn__hero {
+                font-size: 1rem;
+                padding: 8px 16px;
+            }
         }
     </style>
 </head>

@@ -1,37 +1,38 @@
 <?php
-session_start(); // Iniciar la sesión
+session_start();
 require 'db_connection.php';
 
 if (!isset($_SESSION['user_id']) || $_SESSION['rol'] !== 'cliente') {
-    header('Location: login.php'); // Redirigir al usuario al login si no tiene el rol de cliente
-    exit(); // Detener la ejecución del script
+    header('Location: login.php');
+    exit();
 }
 
-// Continuar con el resto del código solo si el usuario tiene el rol de cliente
 $user_id = $_SESSION['user_id'];
-    if(isset($_GET['clase']) && isset($_GET['bono'])) {
-        // Obtener los parámetros de la URL
-        $clase = $_GET['clase'];
-        $bono = $_GET['bono'];
-    
-        // Consultar la base de datos para obtener los detalles de la clase y el precio del bono
-        $stmt_clase = $pdo->prepare("SELECT * FROM clases WHERE Nombre = ?");
-        $stmt_clase->execute([$clase]);
-        $claseDetails = $stmt_clase->fetch();
-        
-        // Verificar si se encontraron resultados y determinar el precio del bono seleccionado
-        if($claseDetails) {
-            $precioBono = ($bono == '6') ? $claseDetails['PrecioBono6'] : $claseDetails['PrecioBono10'];
-                $precioBonoSeleccionado = $precioBono;
 
-        // Insertar la reserva en la tabla de reservas solo con el precio del bono
-        $stmt_reserva = $pdo->prepare("INSERT INTO reservas (PrecioBonoSeleccionado) VALUES (?)");
-        $stmt_reserva->execute([$precioBonoSeleccionado]);
-        } else {
-            // Manejar el caso en que no se encuentre la clase
-            echo "La clase seleccionada no existe.";
-        }
+if (isset($_GET['clase']) && isset($_GET['bono'])) {
+    $clase = $_GET['clase'];
+    $bono = $_GET['bono'];
+
+    $stmt_clase = $pdo->prepare("SELECT * FROM clases WHERE Nombre = ?");
+    $stmt_clase->execute([$clase]);
+    $claseDetails = $stmt_clase->fetch();
+
+    if ($claseDetails) {
+        $precioBono = ($bono == '6') ? $claseDetails['PrecioBono6'] : $claseDetails['PrecioBono10'];
+        $precioBonoSeleccionado = $precioBono;
+
+        // Guardar los detalles en la sesión
+        $_SESSION['clase'] = $clase;
+        $_SESSION['bono'] = $bono;
+        $_SESSION['precioBonoSeleccionado'] = $precioBonoSeleccionado;
+
+        // Redirigir a la página de reserva
+        header("Location: reservar.php?clase=$clase&bono=$bono");
+        exit();
+    } else {
+        echo "La clase seleccionada no existe.";
     }
+}
 ?>
 
 <!DOCTYPE html>
@@ -180,7 +181,7 @@ $user_id = $_SESSION['user_id'];
 
     <div class="container-bonos">
         <?php
-        if(isset($claseDetails)) {
+        if (isset($claseDetails)) {
             echo "<div class='product'>";
             echo "<div class='description'>";
             echo "<h2>Detalles de la Clase</h2>";
@@ -189,7 +190,7 @@ $user_id = $_SESSION['user_id'];
             echo "<p><strong>Dia:</strong> {$claseDetails['Dia']}</p>";
             echo "<p><strong>Precio del Bono {$bono}:</strong> {$precioBono}€</p>";
             echo "</div>";
-            echo "<a href='reservar.php?clase={$claseDetails['Nombre']}&bono={$bono}' class='bonus-button'>Reservar</a>";
+            echo "<a href='reservar.php' class='bonus-button'>Reservar</a>";
             echo "</div>";
         } else {
             echo "La clase seleccionada no existe.";

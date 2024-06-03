@@ -2,25 +2,20 @@
 session_start();
 require 'db_connection.php';
 
-// Verificar si el usuario está autenticado y tiene el rol de cliente
 if (isset($_SESSION['user_id']) && $_SESSION['rol'] === 'cliente') {
-    // Obtener el ID del usuario de la sesión
     $user_id = $_SESSION['user_id'];
 
-    // Consultar la base de datos para obtener los datos del usuario
     $stmt_usuario = $pdo->prepare("SELECT * FROM usuarios WHERE id = ?");
     $stmt_usuario->execute([$user_id]);
     $usuario = $stmt_usuario->fetch();
 
-    // Obtener la fecha actual
     $fecha_actual = date('Y-m-d');
 
-    // Verificar si se han recibido los datos de la reserva por POST
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // Obtener los datos del formulario
-        $clase = $_POST['clase'];
-        $bono = $_POST['bono'];
-        $fecha = $fecha_actual; // Utilizar la fecha actual
+        $clase = $_SESSION['clase'];
+        $bono = $_SESSION['bono'];
+        $precioBonoSeleccionado = $_SESSION['precioBonoSeleccionado'];
+
         $direccion = $_POST['direccion'];
         $localidad = $_POST['localidad'];
         $provincia = $_POST['provincia'];
@@ -28,7 +23,6 @@ if (isset($_SESSION['user_id']) && $_SESSION['rol'] === 'cliente') {
         $codpos = $_POST['codpos'];
         $formaPago = $_POST['forma_pago'];
 
-        // Consultar la base de datos para obtener el ID de la clase
         $stmt_clase = $pdo->prepare("SELECT ClaseID FROM clases WHERE Nombre = ?");
         $stmt_clase->execute([$clase]);
         $clase_row = $stmt_clase->fetch();
@@ -36,26 +30,37 @@ if (isset($_SESSION['user_id']) && $_SESSION['rol'] === 'cliente') {
         if ($clase_row) {
             $clase_id = $clase_row['ClaseID'];
 
-            // Insertar la reserva en la tabla reservas
-            $stmt_reserva = $pdo->prepare("INSERT INTO reservas (UsuarioID, ClaseID, Fecha, Direccion, Localidad, Provincia, Pais, CodPos, FormaPago, activo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 1)");
-            $stmt_reserva->execute([$user_id, $clase_id, $fecha, $direccion, $localidad, $provincia, $pais, $codpos, $formaPago]);
-
-             // Obtener el ID de la reserva insertada
-            $reserva_id = $pdo->lastInsertId();
-
-          // Obtener el precio del bono de la URL
-$precioBonoSeleccionado = $_GET['precio'];
-
-// Insertar la compra en la tabla compras
-$stmt_compra = $pdo->prepare("INSERT INTO compras (UsuarioID, ClaseID, FechaCompra, PrecioTotal, FormaPago) VALUES (?, ?, NOW(), ?, ?)");
-$stmt_compra->execute([$user_id, $clase_id, $precioBonoSeleccionado, $formaPago]);
+            $pdo->beginTransaction();
+            try {
+                // Insertar en la tabla de reservas
+                $stmt_reserva = $pdo->prepare("INSERT INTO reservas (UsuarioID, ClaseID, Fecha, Direccion, Localidad, Provincia, Pais, CodPos, FormaPago, activo, PrecioBonoSeleccionado) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 1, ?)");
+                $stmt_reserva->execute([$user_id, $clase_id, $fecha_actual, $direccion, $localidad, $provincia, $pais, $codpos, $formaPago, $precioBonoSeleccionado]);
 
 
-            // Redirigir al usuario a una página de éxito
-            header("Location: confirmar_reserva.php");
-            exit();
-        }   else {
-            // Manejar el caso en que no se encuentre la clase
+                // Obtener el ID de la reserva recién insertada
+                $reserva_id = $pdo->lastInsertId();
+
+                // Insertar en la tabla de compras
+                $stmt_compra = $pdo->prepare("INSERT INTO compras (UsuarioID, ClaseID, FechaCompra, PrecioTotal, FormaPago) VALUES (?, ?, NOW(), ?, ?)");
+                $stmt_compra->execute([$user_id, $clase_id, $precioBonoSeleccionado, $formaPago]);
+
+                // Obtener el ID de la compra recién insertada
+                $compra_id = $pdo->lastInsertId();
+
+                // Actualizar la reserva con el ID de la compra
+                $stmt_update_reserva = $pdo->prepare("UPDATE reservas SET CompraID = ?, EstadoReserva = 'Pagado' WHERE ReservaID = ?");
+                $stmt_update_reserva->execute([$compra_id, $reserva_id]);
+
+                $pdo->commit();
+
+                // Redirigir a una página de éxito
+                header("Location: confirmar_reserva.php");
+                exit();
+            } catch (Exception $e) {
+                $pdo->rollBack();
+                echo "Fallo en la transacción: " . $e->getMessage();
+            }
+        } else {
             echo "La clase seleccionada no existe.";
         }
     }

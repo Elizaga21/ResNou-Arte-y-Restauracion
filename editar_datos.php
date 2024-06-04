@@ -168,20 +168,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             color: #333;
         }
 
-        .error-container {
-            background-color: #dc3545;
-            color: #fff;
-            padding: 10px;
-            margin-bottom: 20px;
-            border-radius: 5px;
-        }
-
-        .error-list {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-        }
-
         .error {
             margin-bottom: 5px;
         }
@@ -192,14 +178,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <div class="container-datos">
     <h2>Editar Datos</h2>
 
-    <?php if (!empty($errors)) : ?>
-    <div class="error-container">
-        <ul class="error-list">
-            <?php foreach ($errors as $error) : ?>
-                <li class="error"><?php echo $error; ?></li>
-            <?php endforeach; ?>
-        </ul>
-    </div>
+    <?php if (!empty($errors)): ?>
+            <div style="color: red; margin-bottom: 10px;">
+                <strong>Error(es):</strong>
+                <ul>
+                    <?php foreach ($errors as $error): ?>
+                        <li><?php echo $error; ?></li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
 <?php endif; ?>
 
     <form method="POST">

@@ -9,7 +9,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['rol'] !== 'administrador') {
 
 
 require 'db_connection.php';
-//require 'clientes.php';
+require 'clientes.php';
 
 // Variables para almacenar la información del cliente
 $clienteInfo = "";

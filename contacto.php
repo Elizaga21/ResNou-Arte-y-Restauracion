@@ -107,6 +107,10 @@
             <a href="https://api.whatsapp.com/send/?phone=34670335748" target="_blank" rel="noopener">
     <i class="fab fa-whatsapp"></i> Contactar por WhatsApp
 </a>
+<br><br>
+            <a href="https://www.instagram.com/res_nou_arteyrestauracion/" target="_blank" rel="noopener">
+                <i class="fab fa-instagram"></i> Síguenos en Instagram
+            </a>
 
         </div>
     </section>
